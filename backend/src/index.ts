@@ -10,9 +10,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors({origin: "https://bmoretoday.modamo.xyz/"}));
-
-app.use("/api/events", router);
+app.use(cors());
+app.use("/api/events", router)
 
 app.get("/", (req, res) => {
 	res.send("API o7!");

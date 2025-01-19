@@ -8,7 +8,7 @@ const App = () => {
 		const fetchEvents = async () => {
 			try {
 				const response = await fetch(
-					"https://bmoretoday.modamo.xyz/api/events"
+					"http://bmoretoday.modamo.xyz/api/events"
 				);
 				const data = await response.json();
 
@@ -24,8 +24,12 @@ const App = () => {
 	return (
 		<div>
 			<h1>Bmore Today</h1>
-			<h2>Bmore By Doing More</h2>
-			<p>{JSON.stringify(events)}</p>
+			<h2>Bmore by Doing More</h2>
+			<ul>
+				{events.map((event, index) => (
+					<li key={index}>{JSON.stringify(event)}</li>
+				))}
+			</ul>
 		</div>
 	);
 };

@@ -34,10 +34,31 @@ export const getBaltShowPlaceEvents = async () => {
 	}[] = [];
 
 	todaysEvents.each((_, el) => {
-		const event = $(el).text().trim();
-		const [title, time, price, location] = event.split(/\.|M,|@/);
+		let event = $(el).text().trim();
 
-		events.push({ title, time, price, location });
+		const locationRegex = /@ (.+)$/;
+		const locationMatch = event.match(locationRegex);
+		const location = locationMatch ? locationMatch[1].trim() : "Unknown";
+
+		event = event.replace(locationRegex, "").trim();
+
+		const priceRegex = /(\$.+)/;
+		const priceMatch = event.match(priceRegex);
+		const price = priceMatch ? priceMatch[1].trim() : "Unknown";
+
+		event = event.replace(priceRegex, "").trim();
+
+		const timeRegex = /(\d+(A|P)M)/;
+		const timeMatch = event.match(timeRegex);
+		const time = timeMatch ? timeMatch[1].trim() : "Unknown";
+
+		event = event.replace(timeRegex, "").trim();
+
+		const title = event.slice(0, -3);
+
+		if (title.length) {
+			events.push({ title, time, price, location });
+		}
 	});
 
 	for (const event of events) {
