@@ -11,6 +11,50 @@ const App = () => {
 	};
 
 	const [events, setEvents] = useState<Event[]>([]);
+	const x = [
+		{
+			id: 36,
+			title: "Black Celebration",
+			location: "Ottobar Upstairs",
+			time: "9PM",
+			price: "$FREE"
+		},
+		{
+			id: 37,
+			title: "The Dirty Nil, Grumpster, House & Home",
+			location: "Metro",
+			time: "6PM",
+			price: "$20"
+		},
+		{
+			id: 38,
+			title: "DJ Chelle",
+			location: "Fadensonnen",
+			time: "8PM",
+			price: "$FREE"
+		},
+		{
+			id: 39,
+			title: "Nobody Is Ever Missing",
+			location: "The Voxel",
+			time: "4PM",
+			price: "$20-$40"
+		},
+		{
+			id: 40,
+			title: "Monster Jam",
+			location: "CFG Arena",
+			time: "1PM",
+			price: "$29"
+		},
+		{
+			id: 41,
+			title: "School Of Rock Winter Concert",
+			location: "The Recher",
+			time: "11AM",
+			price: "$10"
+		}
+	];
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -34,7 +78,7 @@ const App = () => {
 			<h1>Bmore Today</h1>
 			<h2>Get Outside and Bmore Today</h2>
 			<ul>
-				{events.map((event, index) => (
+				{x.map((event, index) => (
 					<li key={index}>
 						<p className="title">{event.title}</p>
 						<div>

@@ -1,11 +1,11 @@
 body {
-	background-color: #5A189A;
+	background-color: #5a189a;
 	padding: 1rem;
 }
 
 h1,
 h2 {
-	color: #FFBA08;
+	color: #ffba08;
 }
 
 ul {
@@ -14,7 +14,7 @@ ul {
 }
 
 li {
-	color: #5A189A;
+	color: #5a189a;
 	background-color: #e0aaff;
 	margin: 1rem 0;
 	border-radius: 8px;
@@ -25,7 +25,8 @@ li {
 }
 
 div {
-	width: 50%;
+	background-color: aqua;
+	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 }
@@ -35,10 +36,16 @@ div {
 }
 
 div p {
-	color: #5A189A;
+	color: #5a189a;
 	font-size: 0.9rem;
 }
 
 p {
 	margin: 0;
+}
+
+@media (min-width: 480px) {
+	div {
+		width: 50%;
+	}
 }
