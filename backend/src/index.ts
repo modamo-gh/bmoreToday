@@ -3,6 +3,7 @@ import { configDotenv } from "dotenv";
 import router from "./api/events";
 import pool from "../db";
 import cors from "cors";
+import path from "path";
 
 configDotenv();
 
@@ -14,9 +15,10 @@ app.use(
 	cors({ origin: "https://bmoretoday.modamo.xyz", optionsSuccessStatus: 200 })
 );
 app.use("/api/events", router);
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("/", (req, res) => {
-	res.send("API o7!");
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
 });
 
 (async () => {
