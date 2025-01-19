@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useEffect, useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const [events, setEvents] = useState([]);
+
+	useEffect(() => {
+		const fetchEvents = async () => {
+			try {
+				const response = await fetch(
+					"https://bmoretoday.modamo.xyz/api/events"
+				);
+				const data = await response.json();
+
+				setEvents(data);
+			} catch (error) {
+				console.error("Error fetching events", error);
+			}
+		};
+
+		fetchEvents();
+	}, []);
+
+	return (
+		<div>
+			<h1>Bmore Today</h1>
+			<h2>Bmore By Doing More</h2>
+			<p>{JSON.stringify(events)}</p>
+		</div>
+	);
+};
 
 export default App;
