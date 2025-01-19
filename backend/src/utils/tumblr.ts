@@ -22,7 +22,7 @@ export const getBaltShowPlaceEvents = async () => {
 	const $ = load(body);
 
 	const todaysHeader = $("h2").filter(
-		(_, el) => $(el).text().trim() === todaysDate
+		(_: number, el) => $(el).text().trim() === todaysDate
 	);
 
 	const todaysEvents = todaysHeader.nextUntil("h2", "p");
@@ -33,7 +33,7 @@ export const getBaltShowPlaceEvents = async () => {
 		price: string;
 	}[] = [];
 
-	todaysEvents.each((_, el) => {
+	todaysEvents.each((_: number, el) => {
 		let event = $(el).text().trim();
 
 		const locationRegex = /@ (.+)$/;

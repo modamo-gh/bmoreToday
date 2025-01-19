@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import pool from "../../db";
 import { getBaltShowPlaceEvents } from "../utils/tumblr";
 
@@ -12,7 +12,7 @@ type Event = {
 	price: string;
 };
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
 	try {
 		const result = await pool.query("SELECT * from events");
 
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
 	try {
 		await getBaltShowPlaceEvents();
 		res.status(201).json({ message: "Events saved successfully!" });

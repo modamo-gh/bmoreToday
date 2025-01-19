@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Request, Response} from "express";
 import { configDotenv } from "dotenv";
 import router from "./api/events";
 import pool from "../db";
@@ -17,7 +17,7 @@ app.use(
 app.use("/api/events", router);
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
 	res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
 });
 
