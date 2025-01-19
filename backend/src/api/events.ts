@@ -3,6 +3,14 @@ import pool from "../../db";
 
 const router = Router();
 
+type Event = {
+	title: string;
+	description: string;
+	location: string;
+	time: string;
+	price: string;
+};
+
 router.get("/", async (req, res) => {
 	try {
 		const result = await pool.query("SELECT * from events");
@@ -14,7 +22,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-	const events = req.body.events;
+	const events: Event[] = req.body.events || [];
+
+	console.log("Events retrieved!")
 
 	try {
 		const values = events.map(
