@@ -8,12 +8,7 @@ const App = () => {
 		const fetchEvents = async () => {
 			try {
 				const response = await fetch(
-					"https://bmoretoday.modamo.xyz/api/events",
-					{
-						headers: {
-							Accept: "application/json"
-						}
-					}
+					"https://bmoretoday-backend.onrender.com/api/events"
 				);
 				const data = await response.json();
 
