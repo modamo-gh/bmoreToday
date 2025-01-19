@@ -1,5 +1,6 @@
 import { Router } from "express";
 import pool from "../../db";
+import { getBaltShowPlaceEvents } from "../utils/tumblr";
 
 const router = Router();
 
@@ -22,21 +23,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-	const events: Event[] = req.body.events || [];
-
-	console.log("Events retrieved!")
-
 	try {
-		const values = events.map(
-			({ title, description, location, time, price }) =>
-				`('${title}', '${description}', '${location}', '${time}', '${price}')`
-		);
-		const query = `INSERT INTO events (title, description, location, time, price) VALUES ${values.join(
-			", "
-		)}`;
-
-		await pool.query(query);
-
+		await getBaltShowPlaceEvents();
 		res.status(201).json({ message: "Events saved successfully!" });
 	} catch (error) {
 		console.log("Error saving events:", error);

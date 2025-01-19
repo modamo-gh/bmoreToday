@@ -12,12 +12,15 @@
 	"type": "commonjs",
 	"description": "",
 	"dependencies": {
+		"cheerio": "^1.0.0",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
+		"luxon": "^3.5.0",
 		"pg": "^8.13.1"
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.0",
+		"@types/luxon": "^3.4.2",
 		"@types/node": "^22.10.7",
 		"@types/pg": "^8.11.10",
 		"ts-node": "^10.9.2",
