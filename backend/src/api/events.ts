@@ -4,14 +4,6 @@ import { getBaltShowPlaceEvents } from "../utils/tumblr";
 
 const router = Router();
 
-type Event = {
-	title: string;
-	description: string;
-	location: string;
-	time: string;
-	price: string;
-};
-
 router.get("/", async (req: Request, res: Response) => {
 	try {
 		const result = await pool.query("SELECT * from events");
