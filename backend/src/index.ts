@@ -1,9 +1,11 @@
-import express, {Request, Response} from "express";
+import express, { Request, Response } from "express";
 import { configDotenv } from "dotenv";
 import router from "./api/events";
 import pool from "../db";
 import cors from "cors";
 import path from "path";
+import cron from "node-cron";
+import { getBaltShowPlaceEvents } from "./utils/tumblr";
 
 configDotenv();
 
@@ -32,4 +34,13 @@ app.get("*", (req: Request, res: Response) => {
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
+});
+
+cron.schedule("0 9 * * *", async () => {
+	try {
+		await pool.query("TRUNCATE TABLE events");
+		await getBaltShowPlaceEvents();
+	} catch (error) {
+		console.error("Error during cron job:", error);
+	}
 });
