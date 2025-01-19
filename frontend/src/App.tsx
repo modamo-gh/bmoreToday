@@ -8,7 +8,7 @@ const App = () => {
 		const fetchEvents = async () => {
 			try {
 				const response = await fetch(
-					"http://bmoretoday.modamo.xyz/api/events"
+					"https://bmoretoday.modamo.xyz/api/events"
 				);
 				const data = await response.json();
 

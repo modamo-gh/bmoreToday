@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(
-	cors({ origin: "http://bmoretoday.modamo.xyz", optionsSuccessStatus: 200 })
+	cors({ origin: "https://bmoretoday.modamo.xyz", optionsSuccessStatus: 200 })
 );
 app.use("/api/events", router);
 
