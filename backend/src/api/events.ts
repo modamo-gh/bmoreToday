@@ -17,8 +17,8 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
 	try {
-		// await getBaltShowPlaceEvents();
-		await getBaltimoreMagazineEvents();
+		await getBaltShowPlaceEvents();
+		// await getBaltimoreMagazineEvents();
 
 		res.status(201).json({ message: "Events saved successfully!" });
 	} catch (error) {

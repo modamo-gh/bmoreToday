@@ -63,8 +63,14 @@ export const getBaltShowPlaceEvents = async () => {
 
 	for (const event of events) {
 		await pool.query(
-			"INSERT INTO events (title, location, time, price) VALUES ($1, $2, $3, $4)",
-			[event.title, event.location, event.time, event.price]
+			"INSERT INTO events (title, location, time, price, source) VALUES ($1, $2, $3, $4, $5)",
+			[
+				event.title,
+				event.location,
+				event.time,
+				event.price,
+				blogIdentifier
+			]
 		);
 	}
 };
