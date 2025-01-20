@@ -36,7 +36,7 @@ app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
 });
 
-cron.schedule("14 0 * * *", async () => {
+cron.schedule("0 14 * * *", async () => {
 	try {
 		await pool.query("TRUNCATE TABLE events");
 		await getBaltShowPlaceEvents();
