@@ -48,7 +48,7 @@ export const getBaltShowPlaceEvents = async () => {
 
 		event = event.replace(priceRegex, "").trim();
 
-		const timeRegex = /(\d+(A|P)M)/;
+		const timeRegex = /((\d+:)?\d+(A|P)M)/;
 		const timeMatch = event.match(timeRegex);
 		const time = timeMatch ? timeMatch[1].trim() : "Unknown";
 
