@@ -5,10 +5,11 @@ import EventsList from "./components/EventsList.tsx";
 
 const App = () => {
 	type Event = {
-		title: string;
 		location: string;
-		time: string;
 		price: string;
+		source: string;
+		time: string;
+		title: string;
 	};
 
 	const [events, setEvents] = useState<Event[]>([]);
@@ -28,11 +29,22 @@ const App = () => {
 		fetchEvents();
 	}, []);
 
+	const baltShowPlaceEvents = events.filter(
+		(event) => event.source === "baltshowplace.tumblr.com"
+	);
+	const baltimoreMagazineEvents = events.filter(
+		(event) => event.source === "https://events.baltimoremagazine.com"
+	);
+
 	return (
 		<div className="body">
 			<h1>Bmore Today</h1>
 			<h2>Get Outside and Bmore Today</h2>
-			<EventsList events={events} name={"BaltShowPlace"} />
+			<EventsList events={baltShowPlaceEvents} name={"BaltShowPlace"} />
+			<EventsList
+				events={baltimoreMagazineEvents}
+				name={"Baltimore Magazine"}
+			/>
 		</div>
 	);
 };
