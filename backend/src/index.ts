@@ -6,6 +6,7 @@ import cors from "cors";
 import path from "path";
 import cron from "node-cron";
 import { getBaltShowPlaceEvents } from "./utils/tumblr";
+import { getBaltimoreMagazineEvents } from "./utils/localist";
 
 configDotenv();
 
@@ -40,6 +41,7 @@ cron.schedule("0 14 * * *", async () => {
 	try {
 		await pool.query("TRUNCATE TABLE events");
 		await getBaltShowPlaceEvents();
+		await getBaltimoreMagazineEvents();
 	} catch (error) {
 		console.error("Error during cron job:", error);
 	}
