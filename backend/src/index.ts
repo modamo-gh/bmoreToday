@@ -36,17 +36,6 @@ app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
 });
 
-(async () => {
-    console.log("Manually triggering the cron job...");
-    try {
-        await pool.query("TRUNCATE TABLE events");
-        await getBaltShowPlaceEvents();
-        console.log("Manual run successful");
-    } catch (error) {
-        console.error("Error during manual run:", error);
-    }
-})();
-
 cron.schedule("14 0 * * *", async () => {
 	try {
 		await pool.query("TRUNCATE TABLE events");
