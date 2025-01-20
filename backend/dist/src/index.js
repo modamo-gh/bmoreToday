@@ -18,6 +18,8 @@ const events_1 = __importDefault(require("./api/events"));
 const db_1 = __importDefault(require("../db"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
+const node_cron_1 = __importDefault(require("node-cron"));
+const tumblr_1 = require("./utils/tumblr");
 (0, dotenv_1.configDotenv)();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
@@ -40,3 +42,12 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+node_cron_1.default.schedule("0 14 * * *", () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield db_1.default.query("TRUNCATE TABLE events");
+        yield (0, tumblr_1.getBaltShowPlaceEvents)();
+    }
+    catch (error) {
+        console.error("Error during cron job:", error);
+    }
+}));

@@ -41,7 +41,7 @@ const getBaltShowPlaceEvents = () => __awaiter(void 0, void 0, void 0, function*
         const priceMatch = event.match(priceRegex);
         const price = priceMatch ? priceMatch[1].trim() : "Unknown";
         event = event.replace(priceRegex, "").trim();
-        const timeRegex = /(\d+(A|P)M)/;
+        const timeRegex = /((\d+:)?\d+(A|P)M)/;
         const timeMatch = event.match(timeRegex);
         const time = timeMatch ? timeMatch[1].trim() : "Unknown";
         event = event.replace(timeRegex, "").trim();

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const db_1 = __importDefault(require("../../db"));
 const tumblr_1 = require("../utils/tumblr");
+const localist_1 = require("../utils/localist");
 const router = (0, express_1.Router)();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -28,6 +29,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, tumblr_1.getBaltShowPlaceEvents)();
+        yield (0, localist_1.getBaltimoreMagazineEvents)();
         res.status(201).json({ message: "Events saved successfully!" });
     }
     catch (error) {
