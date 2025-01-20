@@ -3,12 +3,16 @@ import pool from "../../db";
 
 export const getBaltimoreMagazineEvents = async () => {
 	const baseURL = "https://events.baltimoremagazine.com";
+    console.log("Fetching Baltimore Magazine events...");
 	const response = await fetch(`${baseURL}/api/2/events`);
 
 	const data = await response.json();
+    console.log("Parsed data:", data);
+
 	const events = data.events;
 
 	for (const event of events) {
+        console.log("Processing event:", event.event.title);
 		const title = event.event.title;
 		const location = event.event.location || event.event.location_name;
 

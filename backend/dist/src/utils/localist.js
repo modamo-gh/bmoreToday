@@ -17,10 +17,13 @@ const luxon_1 = require("luxon");
 const db_1 = __importDefault(require("../../db"));
 const getBaltimoreMagazineEvents = () => __awaiter(void 0, void 0, void 0, function* () {
     const baseURL = "https://events.baltimoremagazine.com";
+    console.log("Fetching Baltimore Magazine events...");
     const response = yield fetch(`${baseURL}/api/2/events`);
     const data = yield response.json();
+    console.log("Parsed data:", data);
     const events = data.events;
     for (const event of events) {
+        console.log("Processing event:", event.event.title);
         const title = event.event.title;
         const location = event.event.location || event.event.location_name;
         const startTime = event.event.event_instances[0].event_instance.start;
