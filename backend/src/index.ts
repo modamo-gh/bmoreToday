@@ -1,17 +1,9 @@
-import express, { Request, Response } from "express";
-import { configDotenv } from "dotenv";
-import router from "./api/events";
-import pool from "../db";
 import cors from "cors";
+import express, { Request, Response } from "express";
 import path from "path";
-import cron from "node-cron";
-import { getBaltShowPlaceEvents } from "./utils/tumblr";
-import { getBaltimoreMagazineEvents } from "./utils/localist";
-
-configDotenv();
+import router from "./api/events";
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(
@@ -22,27 +14,4 @@ app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 app.get("*", (req: Request, res: Response) => {
 	res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
-});
-
-(async () => {
-	try {
-		await pool.query("SELECT NOW()");
-		console.log("Database connected successfully!");
-	} catch (error) {
-		console.error("Error connecting to databases:", error);
-	}
-})();
-
-app.listen(port, () => {
-	console.log(`Server running on port ${port}`);
-});
-
-cron.schedule("0 14 * * *", async () => {
-	try {
-		await pool.query("TRUNCATE TABLE events");
-		await getBaltShowPlaceEvents();
-		await getBaltimoreMagazineEvents();
-	} catch (error) {
-		console.error("Error during cron job:", error);
-	}
 });
