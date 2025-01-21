@@ -14,9 +14,15 @@
 	margin-bottom: 16px;
 }
 
+.event-header {
+	display: flex;
+	align-items: center;
+}
+
 h3 {
 	color: #5a189a;
 	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
 .list-container {

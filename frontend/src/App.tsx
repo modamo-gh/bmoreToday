@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "./App.css";
 import EventsList from "./components/EventsList.tsx";
+import TumblrIcon from "./components/icons/TumblrIcon.tsx";
+import InternetIcon from "./components/icons/InternetIcon.tsx";
 
 const App = () => {
 	type Event = {
@@ -40,10 +42,17 @@ const App = () => {
 		<div className="body">
 			<h1>Bmore Today</h1>
 			<h2>Get Outside and Bmore Today</h2>
-			<EventsList events={baltShowPlaceEvents} name={"BaltShowPlace"} />
+			<EventsList
+				events={baltShowPlaceEvents}
+				icon={<TumblrIcon />}
+				name={"BaltShowPlace"}
+				url={"https://baltshowplace.tumblr.com/"}
+			/>
 			<EventsList
 				events={baltimoreMagazineEvents}
+				icon={<InternetIcon />}
 				name={"Baltimore Magazine"}
+				url={"https://events.baltimoremagazine.com/"}
 			/>
 		</div>
 	);

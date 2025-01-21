@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/EventsList.css";
 
-const EventsList = ({ name, events }) => {
+const EventsList = ({ events, icon, name, url }) => {
 	const [isCollapsed, setIsCollapsed] = useState(true);
 
 	const toggleIsCollapsed = () => {
@@ -11,7 +11,10 @@ const EventsList = ({ name, events }) => {
 
 	return (
 		<div className="events-container" onClick={toggleIsCollapsed}>
-			<h3>{name}</h3>
+			<div className="event-header">
+				<h3>{name}</h3>
+				<a href={url}>{icon}</a>
+			</div>
 			{isCollapsed ? null : (
 				<div className="list-container">
 					<ul>
