@@ -37,6 +37,9 @@ const App = () => {
 	const baltimoreMagazineEvents = events.filter(
 		(event) => event.source === "https://events.baltimoremagazine.com"
 	);
+	const prattEvents = events.filter(
+		(event) => event.source === "https://calendar.prattlibrary.org/"
+	);
 
 	return (
 		<div className="body">
@@ -53,6 +56,12 @@ const App = () => {
 				icon={<TumblrIcon />}
 				name={"BaltShowPlace"}
 				url={"https://baltshowplace.tumblr.com/"}
+			/>
+			<EventsList
+				events={prattEvents}
+				icon={<InternetIcon />}
+				name={"Enoch Pratt Free Library"}
+				url={"https://calendar.prattlibrary.org/"}
 			/>
 		</div>
 	);
