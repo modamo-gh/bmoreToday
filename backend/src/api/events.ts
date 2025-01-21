@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import pool from "../../db";
+import { getLocalistEvents } from "../utils/localist";
 import { getBaltShowPlaceEvents } from "../utils/tumblr";
-import { getBaltimoreMagazineEvents } from "../utils/localist";
 
 const router = Router();
 
@@ -18,8 +18,8 @@ router.get("/", async (req: Request, res: Response) => {
 router.post("/", async (req: Request, res: Response) => {
 	try {
 		await getBaltShowPlaceEvents();
-		await getBaltimoreMagazineEvents();
-
+		await getLocalistEvents("https://events.baltimoremagazine.com");
+		await getLocalistEvents("https://calendar.prattlibrary.org/");
 		res.status(201).json({ message: "Events saved successfully!" });
 	} catch (error) {
 		console.log("Error saving events:", error);
