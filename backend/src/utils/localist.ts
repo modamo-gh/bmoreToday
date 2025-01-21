@@ -3,18 +3,21 @@ import pool from "../../db";
 
 export const getBaltimoreMagazineEvents = async () => {
 	const baseURL = "https://events.baltimoremagazine.com";
-    console.log("Fetching Baltimore Magazine events...");
+	console.log("Fetching Baltimore Magazine events...");
 	const response = await fetch(`${baseURL}/api/2/events`);
 
 	const data = await response.json();
-    console.log("Parsed data:", data);
+	console.log("Parsed data:", data);
 
 	const events = data.events;
 
 	for (const event of events) {
-        console.log("Processing event:", event.event.title);
+		console.log("Processing event:", event.event.title);
 		const title = event.event.title;
-		const location = event.event.location || event.event.location_name;
+		const location =
+			event.event.experience === "inperson"
+				? event.event.location || event.event.location_name
+				: "Virtual Event";
 
 		const startTime = event.event.event_instances[0].event_instance.start;
 		const endTime =
