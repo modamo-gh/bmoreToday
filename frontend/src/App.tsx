@@ -43,16 +43,16 @@ const App = () => {
 			<h1>Bmore Today</h1>
 			<h2>Get Outside and Bmore Today</h2>
 			<EventsList
-				events={baltShowPlaceEvents}
-				icon={<TumblrIcon />}
-				name={"BaltShowPlace"}
-				url={"https://baltshowplace.tumblr.com/"}
-			/>
-			<EventsList
 				events={baltimoreMagazineEvents}
 				icon={<InternetIcon />}
 				name={"Baltimore Magazine"}
 				url={"https://events.baltimoremagazine.com/"}
+			/>
+			<EventsList
+				events={baltShowPlaceEvents}
+				icon={<TumblrIcon />}
+				name={"BaltShowPlace"}
+				url={"https://baltshowplace.tumblr.com/"}
 			/>
 		</div>
 	);
