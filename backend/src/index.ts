@@ -9,11 +9,17 @@ app.use(express.json());
 app.use(
 	cors({ origin: "https://bmoretoday.modamo.xyz", optionsSuccessStatus: 200 })
 );
+
 app.use("/api/events", router);
+
 app.use(express.static("/home/modamo/bmoreToday/frontend/build"));
 
 app.get("*", (req: Request, res: Response) => {
-	res.sendFile("/home/modamo/bmoreToday/frontend/build/index.html");
+	if (req.originalUrl.startsWith("/api/")) {
+		res.status(404).json({ error: "API endpoint not found" });
+	} else {
+		res.sendFile("/home/modamo/bmoreToday/frontend/build/index.html");
+	}
 });
 
 app.listen(port, () => {
