@@ -29,11 +29,15 @@ const App = () => {
 					"https://bmoretoday.modamo.xyz/api/events"
 				);
 				const data = await response.json();
+				
+				console.log("Fetched Events:", data);
+				
 				setEvents(data);
 			} catch (error) {
 				console.error("Error fetching events", error);
 			}
 		};
+
 		fetchEvents();
 	}, []);
 
@@ -67,7 +71,7 @@ const App = () => {
 		}
 
 		setFilteredEvents(fe);
-	}, [
+	}, [events,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isEnochPrattLibraryChecked
