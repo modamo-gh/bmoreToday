@@ -27,9 +27,11 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 				</div>
 				<div className="flex items-center">
 					<FaGlobe className="mr-2 text-[#ff6a00] text-lg" />
-					<p className="flex-1 truncate">
-						{event.source.replace("https://", "")}
-					</p>
+					<a href={event.source}>
+						<p className="flex-1 truncate">
+							{event.source.replace("https://", "")}
+						</p>
+					</a>
 				</div>
 				<div className="flex items-center">
 					<FaClock className="mr-2 text-[#ff6a00] text-lg" />
