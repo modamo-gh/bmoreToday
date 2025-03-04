@@ -11,16 +11,22 @@ import { EventCardType } from "../types/EventCardType";
 const EventCard: FC<EventCardType> = ({ event }) => {
 	return (
 		<div className=" bg-[#30255C] flex flex-col gap-2 h-80 rounded-lg p-2">
-			<div className="h-1/2 rounded-lg">
+			<div className="h-1/2 rounded-lg overflow-hidden">
 				<img
-					src={event.imageURL}
+					className="h-full object-cover w-full"
+					src={event.imageurl}
 					alt=""
 				/>
 			</div>
 			<div className="flex flex-col h-1/2 justify-between text-[#f5f5f5]">
 				<div className="flex items-center">
 					<FaTicket className="mr-2 text-[#ff6a00] text-lg" />
-					<p className="flex-1 truncate">{event.title}</p>
+					<p
+						className="flex-1 truncate"
+						title={event.title}
+					>
+						{event.title}
+					</p>
 				</div>
 				<div className="flex items-center">
 					<FaLocationDot className="mr-2 text-[#ff6a00] text-lg" />

@@ -1,7 +1,7 @@
 export type Event = {
     created_at: string;
     id: number;
-    imageURL: string;
+    imageurl: string;
     location: string;
     price: string;
     source: string;
