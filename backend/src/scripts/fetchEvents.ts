@@ -4,7 +4,7 @@ import { getBaltShowPlaceEvents } from "../utils/tumblr";
 
 const fetchEvents = async () => {
 	try {
-		await pool.query("TRUNCATE TABLE events");
+		await pool.query("TRUNCATE TABLE events RESTART IDENTITY");
 		await getBaltShowPlaceEvents();
 		await getLocalistEvents("https://events.baltimoremagazine.com");
 		await getLocalistEvents("https://calendar.prattlibrary.org/");

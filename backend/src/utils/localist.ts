@@ -28,9 +28,11 @@ export const getLocalistEvents = async (baseURL: string) => {
 
 		const price = event.event.ticket_cost || event.event.filters.event_cost?.[0].name || "Not Provided";
 
+		const url = event.event.localist_url;
+
 		await pool.query(
 			"INSERT INTO events (title, location, time, price, source) VALUES ($1, $2, $3, $4, $5)",
-			[title, location, time, price, baseURL]
+			[title, location, time, price, url]
 		);
 	}
 };
