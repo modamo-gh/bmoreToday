@@ -69,7 +69,7 @@ export const getBaltShowPlaceEvents = async () => {
 				event.location,
 				event.time,
 				event.price,
-				blogIdentifier
+				blogIdentifier || "Unknown"
 			]
 		);
 	}
