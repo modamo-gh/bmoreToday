@@ -1,24 +1,11 @@
-import {
-	createContext,
-	Dispatch,
-	ReactNode,
-	SetStateAction,
-	useContext,
-	useState
-} from "react";
-
-type EventContextType = {
-	isBaltimoreMagazineChecked: boolean;
-	isBaltimoreShowplaceChecked: boolean;
-	isEnochPrattLibraryChecked: boolean;
-	setIsBaltimoreMagazineChecked: Dispatch<SetStateAction<boolean>>;
-	setIsBaltimoreShowplaceChecked: Dispatch<SetStateAction<boolean>>;
-	setIsEnochPrattLibraryChecked: Dispatch<SetStateAction<boolean>>;
-};
+import { createContext, ReactNode, useContext, useState } from "react";
+import { Event } from "../types/Event";
+import { EventContextType } from "../types/EventContextType";
 
 const EventContext = createContext<EventContextType | undefined>(undefined);
 
 export const EventProvider = ({ children }: { children: ReactNode }) => {
+	const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
 	const [isBaltimoreMagazineChecked, setIsBaltimoreMagazineChecked] =
 		useState(true);
 	const [isBaltimoreShowplaceChecked, setIsBaltimoreShowplaceChecked] =
@@ -29,9 +16,11 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 	return (
 		<EventContext.Provider
 			value={{
+				filteredEvents,
 				isBaltimoreMagazineChecked,
 				isBaltimoreShowplaceChecked,
 				isEnochPrattLibraryChecked,
+				setFilteredEvents,
 				setIsBaltimoreMagazineChecked,
 				setIsBaltimoreShowplaceChecked,
 				setIsEnochPrattLibraryChecked

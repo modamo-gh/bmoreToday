@@ -2,26 +2,18 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { useEventContext } from "./contexts/EventContext";
 import SourcesSidebar from "./components/SourcesSidebar";
+import EventsGrid from "./components/EventsGrid";
+import { Event } from "./types/Event";
 
 const App = () => {
 	const {
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
-		isEnochPrattLibraryChecked
+		isEnochPrattLibraryChecked,
+		setFilteredEvents
 	} = useEventContext();
 
-	type Event = {
-		created_at: string;
-		id: number;
-		location: string;
-		price: string;
-		source: string;
-		time: string;
-		title: string;
-	};
-
 	const [events, setEvents] = useState<Event[]>();
-	const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
 
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -86,17 +78,7 @@ const App = () => {
 	return (
 		<div className="bg-[#1c1a29] h-screen w-screen p-8 gap-8 flex flex-row">
 			<SourcesSidebar />
-			<div className="flex-[4] h-full gap-8 grid grid-cols-3 overflow-y-scroll pr-8 scrollbar">
-				{filteredEvents.map((_, index) => (
-					<div className="rounded-lg bg-[#30255C] h-80" key={index}>
-						<p>{filteredEvents[index].location}</p>
-						<p>{filteredEvents[index].price}</p>
-						<p>{filteredEvents[index].source}</p>
-						<p>{filteredEvents[index].time}</p>
-						<p>{filteredEvents[index].title}</p>
-					</div>
-				))}
-			</div>
+			<EventsGrid />
 		</div>
 	);
 };
