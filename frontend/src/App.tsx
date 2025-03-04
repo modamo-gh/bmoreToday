@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { useEventContext } from "./contexts/EventContext";
-import SourcesSidebar from "./components/SourcesSidebar";
 import EventsGrid from "./components/EventsGrid";
+import SourcesSidebar from "./components/SourcesSidebar";
+import { useEventContext } from "./contexts/EventContext";
 import { Event } from "./types/Event";
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
 		setFilteredEvents
 	} = useEventContext();
 
-	const [events, setEvents] = useState<Event[]>([]);
+	const [events, setEvents] = useState<Event[]>();
 
 	useEffect(() => {
 		const fetchEvents = async () => {
