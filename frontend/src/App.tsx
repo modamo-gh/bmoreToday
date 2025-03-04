@@ -13,7 +13,7 @@ const App = () => {
 		setFilteredEvents
 	} = useEventContext();
 
-	const [events, setEvents] = useState<Event[]>();
+	const [events, setEvents] = useState<Event[]>([]);
 
 	useEffect(() => {
 		const fetchEvents = async () => {
