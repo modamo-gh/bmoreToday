@@ -24,8 +24,8 @@ export const getLocalistEvents = async (baseURL: string) => {
 			const endTime =
 				event.event.event_instances[0].event_instance.end || startTime;
 
-			const startDateTime = DateTime.fromISO(startTime);
-			const endDateTime = DateTime.fromISO(endTime);
+			const startDateTime = DateTime.fromISO(startTime, { zone: "utc" }).setZone("America/New_York");
+			const endDateTime = DateTime.fromISO(endTime, { zone: "utc" }).setZone("America/New_York");
 
 			const formattedStartTime = startDateTime.toFormat("hh:mm a");
 			const formattedEndTime = endDateTime.toFormat("hh:mm a");
