@@ -40,7 +40,7 @@ const SourcesSidebar = () => {
 			/>
 			<SourceFilterCheckbox
 				checked={isBaltimoreMagazineChecked}
-				disabled={false}
+				disabled
 				label={"Bmore Art"}
 				onChange={() => {
 					setIsBaltimoreMagazineChecked((prev) => !prev);
@@ -48,7 +48,7 @@ const SourcesSidebar = () => {
 			/>
 			<SourceFilterCheckbox
 				checked={isEnochPrattLibraryChecked}
-				disabled
+				disabled={false}
 				label={"Enoch Pratt Library"}
 				onChange={() => {
 					setIsEnochPrattLibraryChecked((prev) => !prev);
