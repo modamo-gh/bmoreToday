@@ -22,7 +22,7 @@ weatherRouter.get("/", async (req: Request, res: Response) => {
 		const weather = {
 			temp: data.current.temp,
 			feels_like: data.current.feels_like,
-			icon: data.current.weather.icon
+			icon: data.current.weather[0].icon
 		};
 
 		res.json(weather);
