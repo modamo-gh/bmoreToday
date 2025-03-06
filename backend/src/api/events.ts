@@ -3,9 +3,9 @@ import pool from "../../db";
 import { getLocalistEvents } from "../utils/localist";
 import { getBaltShowPlaceEvents } from "../utils/tumblr";
 
-const router = Router();
+const eventRouter = Router();
 
-router.get("/", async (req: Request, res: Response) => {
+eventRouter.get("/", async (req: Request, res: Response) => {
 	try {
 		const result = await pool.query("SELECT * from events");
 
@@ -15,7 +15,7 @@ router.get("/", async (req: Request, res: Response) => {
 	}
 });
 
-router.post("/", async (req: Request, res: Response) => {
+eventRouter.post("/", async (req: Request, res: Response) => {
 	try {
 		await getBaltShowPlaceEvents();
 		await getLocalistEvents("https://events.baltimoremagazine.com");
@@ -27,4 +27,4 @@ router.post("/", async (req: Request, res: Response) => {
 	}
 });
 
-export default router;
+export default eventRouter;

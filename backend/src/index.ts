@@ -1,6 +1,7 @@
 import cors from "cors";
 import express, { Request, Response } from "express";
-import router from "./api/events";
+import eventRouter from "./api/events";
+import weatherRouter from "./api/weather";
 
 const app = express();
 const port = process.env.PORT || 5342;
@@ -10,7 +11,8 @@ app.use(
 	cors({ origin: "https://bmoretoday.modamo.xyz", optionsSuccessStatus: 200 })
 );
 
-app.use("/api/events", router);
+app.use("/api/events", eventRouter);
+app.use("/api/weather", weatherRouter);
 
 app.use(express.static("/home/modamo/bmoreToday/frontend/build"));
 
