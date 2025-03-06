@@ -25,19 +25,21 @@ const Header: FC<HeaderProps> = ({ headerRef }) => {
 
 	return (
 		<div
-			className="flex gap-8 items-baseline text-[#F5F5F5] w-full"
+			className="flex items-center justify-between text-[#F5F5F5] w-full"
 			ref={headerRef}
 		>
-			<div className="flex flex-1 justify-center">
-				<h1 className="semibold text-3xl w-fit">Bmore Today</h1>
+			<div>
+				<div className="flex flex-1">
+					<h1 className="semibold text-3xl w-fit">Bmore Today</h1>
+				</div>
+				<h2 className="text-lg">Go Outside and B(e)More</h2>
 			</div>
-			<h2 className="text-lg">Go Outside and Bmore Today</h2>
-			<div className="flex flex-col flex-3 items-end">
+			<div className="flex flex-col items-end">
 				<p>{DateTime.now().toLocaleString(DateTime.DATE_HUGE)}</p>
-				<div className="flex flex-row">
-					<p>{`Temp: ${weather.temp}`}</p>
-					<p>{`Feels Like: ${weather.temp}`}</p>
+				<div className="flex flex-row gap-2 items-center justify-center">
 					<img className="h-8 w-8" src={weather.icon_URL} />
+					<p>{`${weather.feels_like}°`}</p>
+					<p>{`Feels Like: ${weather.temp}°`}</p>
 				</div>
 			</div>
 		</div>

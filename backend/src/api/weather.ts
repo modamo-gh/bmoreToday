@@ -22,7 +22,7 @@ weatherRouter.get("/", async (req: Request, res: Response) => {
 		const weather = {
 			temp: data.current.temp,
 			feels_like: data.current.feels_like,
-			icon_URL: `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
+			icon_URL: `https://openweathermap.org/img/wn/${data.current.weather[0].icon}.png`
 		};
 
 		res.json(weather);
