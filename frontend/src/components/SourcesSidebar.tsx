@@ -12,7 +12,7 @@ const SourcesSidebar = () => {
 	} = useEventContext();
 
 	return (
-		<div className="bg-[#232130] flex flex-col flex-1 items-center rounded-lg">
+		<div className="bg-[#232130] flex flex-col max-h-full items-center rounded-lg w-1/5">
 			<h2 className="text-[#f5f5f5] text-lg p-4">Filter Sources</h2>
 			<SourceFilterCheckbox
 				checked={isBaltimoreMagazineChecked}
