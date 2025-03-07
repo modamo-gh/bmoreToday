@@ -5,9 +5,10 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 	checked,
 	disabled,
 	label,
-	onChange
+	onChange,
+	width
 }) => {
-	return (
+	return width > 425 ? (
 		<label className="flex flex-1 gap-2 items-center px-4 w-full">
 			<input
 				disabled={disabled}
@@ -18,6 +19,15 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 			/>
 			<span className="flex-1 text-[#f5f5f5]">{label}</span>
 		</label>
+	) : (
+		<p
+			className={`${
+				checked ? "bg-[#ff6a00]" : "bg-gray-500"
+			} p-1 rounded-sm`}
+			onClick={onChange}
+		>
+			{label}
+		</p>
 	);
 };
 

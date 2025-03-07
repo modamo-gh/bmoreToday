@@ -23,8 +23,6 @@ const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 		fetchWeather();
 	}, []);
 
-	console.log(width);
-
 	return (
 		<div
 			className="flex items-center justify-between text-[#F5F5F5] w-full"

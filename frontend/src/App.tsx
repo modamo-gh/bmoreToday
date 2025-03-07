@@ -114,7 +114,7 @@ const App = () => {
 				}`}
 				style={{ height: `calc(100% - ${headerHeight}px)` }}
 			>
-				<SourcesSidebar />
+				<SourcesSidebar width={width} />
 				<EventsGrid />
 			</div>
 		</div>

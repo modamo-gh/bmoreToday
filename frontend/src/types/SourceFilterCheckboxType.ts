@@ -3,4 +3,5 @@ export type SourceFilterCheckboxType = {
     disabled: boolean;
     label: string;
     onChange: () => void;
+    width: number;
 }
