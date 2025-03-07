@@ -54,24 +54,30 @@ const getGovernmentAndCommunityEvents = async () => {
 
 	const events: Event[] = [];
 
-    todaysEvents.each((_, element) => {
-        const event: Event = {
-            title: "Not Provided",
-            location: "Not Provided",
-            time: "Not Provided",
-            price: "Not Provided"
-        };
+	todaysEvents.each((_, element) => {
+		const event: Event = {
+			title: "Not Provided",
+			location: "Not Provided",
+			time: "Not Provided",
+			price: "Not Provided"
+		};
 
-        let title = $(element).find("a strong").text().trim();
+		let title = $(element).find("a strong").text().trim();
 
-        if(!title){
-            title = $(element).find("strong a").text().trim();
-        }
+		if (!title) {
+			title = $(element).find("strong a").text().trim();
+		}
 
-        event.title = title;
+		event.title = title;
 
-        console.log($(element).text().trim())
-    })
+		let price = $(element).text().trim().match(/\$\d+/)?.[0];
+
+		if (price) {
+			event.price = price;
+		}
+
+		console.log(event);
+	});
 };
 
 getGovernmentAndCommunityEvents();
