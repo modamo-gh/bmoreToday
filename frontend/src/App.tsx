@@ -100,7 +100,7 @@ const App = () => {
 		<div className="bg-[#1c1a29] flex flex-col gap-8 h-screen max-w-screen p-8">
 			<Header headerRef={headerRef} />
 			<div
-				className={`flex flex-row gap-8 w-full ${
+				className={`flex flex-col gap-8 lg:flex-row w-full ${
 					(isBaltimoreMagazineChecked ||
 						isBaltimoreShowplaceChecked ||
 						isEnochPrattLibraryChecked) &&
