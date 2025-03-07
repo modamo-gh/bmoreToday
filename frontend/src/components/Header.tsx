@@ -3,7 +3,7 @@ import { HeaderProps } from "../types/HeaderProps";
 import { Weather } from "../types/Weather";
 import { DateTime } from "luxon";
 
-const Header: FC<HeaderProps> = ({ headerRef }) => {
+const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 	const [weather, setWeather] = useState<Weather>({
 		temp: 0,
 		feels_like: 0,
@@ -23,6 +23,8 @@ const Header: FC<HeaderProps> = ({ headerRef }) => {
 		fetchWeather();
 	}, []);
 
+	console.log(width);
+
 	return (
 		<div
 			className="flex items-center justify-between text-[#F5F5F5] w-full"
@@ -35,11 +37,17 @@ const Header: FC<HeaderProps> = ({ headerRef }) => {
 				<h2 className="text-lg">Go Outside and B(e)More</h2>
 			</div>
 			<div className="flex flex-col items-end">
-				<p>{DateTime.now().toLocaleString(DateTime.DATE_HUGE)}</p>
+				<p>
+					{width >= 768
+						? DateTime.now().toLocaleString(DateTime.DATE_HUGE)
+						: DateTime.now().toLocaleString(DateTime.DATE_MED)}
+				</p>
 				<div className="flex flex-row gap-2 items-center justify-center">
 					<img className="h-8 w-8" src={weather.icon_URL} />
-					<p>{`${weather.feels_like}°`}</p>
-					<p>{`Feels Like: ${weather.temp}°`}</p>
+					<p>{`${weather.temp}°`}</p>
+					{width >= 768 ? (
+						<p>{`Feels Like: ${weather.feels_like}°`}</p>
+					) : null}
 				</div>
 			</div>
 		</div>

@@ -16,6 +16,7 @@ const App = () => {
 
 	const [events, setEvents] = useState<Event[]>();
 	const [headerHeight, setHeaderHeight] = useState(0);
+	const [width, setWidth] = useState(0);
 
 	const headerRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +29,8 @@ const App = () => {
 			if (headerRef.current) {
 				setHeaderHeight(headerRef.current.offsetHeight);
 			}
+
+			setWidth(window.innerWidth);
 		};
 
 		window.addEventListener("resize", handleResize);
@@ -98,13 +101,14 @@ const App = () => {
 
 	return (
 		<div className="bg-[#1c1a29] flex flex-col gap-8 h-screen max-w-screen p-8">
-			<Header headerRef={headerRef} />
+			<Header headerRef={headerRef} width={width} />
 			<div
 				className={`flex flex-col gap-8 lg:flex-row w-full ${
 					(isBaltimoreMagazineChecked ||
 						isBaltimoreShowplaceChecked ||
 						isEnochPrattLibraryChecked) &&
-					events?.length
+					events?.length &&
+					width >= 768
 						? "pb-8"
 						: ""
 				}`}

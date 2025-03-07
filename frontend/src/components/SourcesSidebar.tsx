@@ -12,7 +12,7 @@ const SourcesSidebar = () => {
 	} = useEventContext();
 
 	return (
-		<div className="bg-[#232130] flex flex-row lg:flex-col lg:max-h-full lg:w-1/5 items-center rounded-lg w-full">
+		<div className="bg-[#232130] md:flex flex-row hidden lg:flex-col lg:max-h-full lg:w-1/5 items-center rounded-lg w-full">
 			<h2 className="text-center text-[#f5f5f5] text-lg p-4">
 				Filter Sources
 			</h2>
