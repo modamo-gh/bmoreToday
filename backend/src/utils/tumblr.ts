@@ -2,6 +2,7 @@ import { load } from "cheerio";
 import { DateTime } from "luxon";
 import { configDotenv } from "dotenv";
 import pool from "../../db";
+import { Event } from "../types/Event";
 
 configDotenv();
 
@@ -26,12 +27,7 @@ export const getBaltShowPlaceEvents = async () => {
 	);
 
 	const todaysEvents = todaysHeader.nextUntil("h2", "p");
-	const events: {
-		title: string;
-		location: string;
-		time: string;
-		price: string;
-	}[] = [];
+	const events: Event[] = [];
 
 	todaysEvents.each((_: number, el) => {
 		let event = $(el).text().trim();
