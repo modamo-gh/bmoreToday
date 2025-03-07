@@ -16,7 +16,7 @@ const App = () => {
 
 	const [events, setEvents] = useState<Event[]>();
 	const [headerHeight, setHeaderHeight] = useState(0);
-	const [width, setWidth] = useState(0);
+	const [width, setWidth] = useState(window.innerWidth);
 
 	const headerRef = useRef<HTMLDivElement>(null);
 
