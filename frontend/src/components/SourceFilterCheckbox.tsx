@@ -22,8 +22,10 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 	) : (
 		<p
 			className={`${
-				checked ? "bg-[#ff6a00]" : "bg-gray-500"
-			} p-1 rounded-sm`}
+				checked ? "bg-[#ff6a00]" : "bg-[#232130]"
+			} p-1 rounded-sm ${
+				checked ? "text-[#232130]":  "text-[#f5f5f5]"
+			}`}
 			onClick={onChange}
 		>
 			{label}

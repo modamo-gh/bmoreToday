@@ -42,9 +42,11 @@ const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 				</p>
 				<div className="flex flex-row gap-2 items-center justify-center">
 					<img className="h-8 w-8" src={weather.icon_URL} />
-					<p>{`${weather.temp}°`}</p>
+					<p>{`${Math.round(weather.temp)}°`}</p>
 					{width >= 768 ? (
-						<p>{`Feels Like: ${weather.feels_like}°`}</p>
+						<p>{`Feels Like: ${Math.round(
+							weather.feels_like
+						)}°`}</p>
 					) : null}
 				</div>
 			</div>
