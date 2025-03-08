@@ -35,6 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
 var cheerio_1 = require("cheerio");
@@ -71,15 +80,12 @@ var getBaltimoreBeatURLs = function () { return __awaiter(void 0, void 0, void 0
         }
     });
 }); };
-var getGovernmentAndCommunityEvents = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var url, response, html, $, today, todaysSection, todaysEvents, events;
+var getBaltimoreBeatEvents = function (url) { return __awaiter(void 0, void 0, void 0, function () {
+    var response, html, $, today, todaysSection, todaysEvents, events;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getBaltimoreBeatURLs()];
+            case 0: return [4 /*yield*/, axios_1.default.get(url)];
             case 1:
-                url = (_a.sent()).governmentAndCommunityEventsURL;
-                return [4 /*yield*/, axios_1.default.get(url)];
-            case 2:
                 response = _a.sent();
                 html = response.data;
                 $ = (0, cheerio_1.load)(html);
@@ -90,7 +96,7 @@ var getGovernmentAndCommunityEvents = function () { return __awaiter(void 0, voi
                 todaysEvents = todaysSection.nextUntil("p.has-primary-color", "p");
                 events = [];
                 todaysEvents.each(function (_, element) {
-                    var _a;
+                    var _a, _b, _c;
                     var event = {
                         title: "Not Provided",
                         location: "Not Provided",
@@ -106,10 +112,52 @@ var getGovernmentAndCommunityEvents = function () { return __awaiter(void 0, voi
                     if (price) {
                         event.price = price;
                     }
-                    console.log(event);
+                    var location = (_b = $(element)
+                        .text()
+                        .trim()
+                        .match(/at\s([\w|\s|\.|’]+)(,[\w|\s|\.|']+)?\./)) === null || _b === void 0 ? void 0 : _b[1];
+                    if (location) {
+                        event.location = location[0].toUpperCase() + location.slice(1);
+                    }
+                    var time = (_c = $(element)
+                        .text()
+                        .trim()
+                        .match(/\d{1,2}(:\d{1,2})?\s[a|p]\.m\.(\sto\s((\d{1,2}(:\d{1,2})?\s[a|p]\.m\.)|noon))?/)) === null || _c === void 0 ? void 0 : _c[0];
+                    if (time) {
+                        event.time = time;
+                    }
+                    events.push(event);
                 });
+                return [2 /*return*/, events];
+        }
+    });
+}); };
+var getEvents = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var events, urls, _i, _a, url, es;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                events = [];
+                return [4 /*yield*/, getBaltimoreBeatURLs()];
+            case 1:
+                urls = _b.sent();
+                _i = 0, _a = Object.values(urls);
+                _b.label = 2;
+            case 2:
+                if (!(_i < _a.length)) return [3 /*break*/, 5];
+                url = _a[_i];
+                return [4 /*yield*/, getBaltimoreBeatEvents(url)];
+            case 3:
+                es = _b.sent();
+                events = __spreadArray(__spreadArray([], events, true), es, true);
+                _b.label = 4;
+            case 4:
+                _i++;
+                return [3 /*break*/, 2];
+            case 5:
+                console.log(events);
                 return [2 /*return*/];
         }
     });
 }); };
-getGovernmentAndCommunityEvents();
+getEvents();

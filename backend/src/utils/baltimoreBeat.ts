@@ -2,6 +2,7 @@ import axios from "axios";
 import { load } from "cheerio";
 import { DateTime } from "luxon";
 import { Event } from "../types/Event";
+import pool from "../../db";
 
 const getBaltimoreBeatURLs = async () => {
 	const response = await axios.get(
@@ -41,8 +42,7 @@ const getBaltimoreBeatURLs = async () => {
 	return { governmentAndCommunityEventsURL, artsAndCultureEventsURL };
 };
 
-const getGovernmentAndCommunityEvents = async () => {
-	const url = (await getBaltimoreBeatURLs()).governmentAndCommunityEventsURL;
+const getBaltimoreBeatEvents = async (url: string) => {
 	const response = await axios.get(url);
 	const html = response.data;
 	const $ = load(html);
@@ -70,14 +70,55 @@ const getGovernmentAndCommunityEvents = async () => {
 
 		event.title = title;
 
-		let price = $(element).text().trim().match(/\$\d+/)?.[0];
+		const price = $(element).text().trim().match(/\$\d+/)?.[0];
 
 		if (price) {
 			event.price = price;
 		}
 
-		console.log(event);
+		const location = $(element)
+			.text()
+			.trim()
+			.match(/at\s([\w|\s|\.|’]+)(,[\w|\s|\.|']+)?\./)?.[1];
+
+		if (location) {
+			event.location = location[0].toUpperCase() + location.slice(1);
+		}
+
+		const time = $(element)
+			.text()
+			.trim()
+			.match(
+				/\d{1,2}(:\d{1,2})?\s[a|p]\.m\.(\sto\s((\d{1,2}(:\d{1,2})?\s[a|p]\.m\.)|noon))?/
+			)?.[0];
+
+		if (time) {
+			event.time = time;
+		}
+
+		events.push(event);
 	});
+
+	return events;
 };
 
-getGovernmentAndCommunityEvents();
+export const getEvents = async () => {
+	const urls = await getBaltimoreBeatURLs();
+
+	for (const url of Object.values(urls)) {
+		const events = await getBaltimoreBeatEvents(url);
+
+		for (const event of events) {
+			await pool.query(
+				"INSERT INTO events (title, location, time, price, source) VALUES ($1, $2, $3, $4, $5)",
+				[
+					event.title,
+					event.location,
+					event.time,
+					event.price,
+					url || "Unknown"
+				]
+			);
+		}
+	}
+};
