@@ -5,6 +5,7 @@ import SourceFilterCheckbox from "./SourceFilterCheckbox";
 
 const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	const {
+		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isEnochPrattLibraryChecked,
@@ -24,10 +25,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				className={`flex flex-row gap-2 h-full md:gap-0 lg:flex-col lg:overflow-x-hidden overflow-x-scroll whitespace-nowrap`}
 			>
 				<SourceFilterCheckbox
-					checked={false}
-					disabled
+					checked={isBaltimoreBeatChecked}
+					disabled={false}
 					label={"Baltimore Beat"}
-					onChange={() => {}}
+					onChange={() => {
+						setIsBaltimoreMagazineChecked((prev) => !prev);
+					}}
 					width={width}
 				/>
 				<SourceFilterCheckbox

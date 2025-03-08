@@ -46,7 +46,9 @@ const getBaltimoreBeatEvents = async (url: string) => {
 	const response = await axios.get(url);
 	const html = response.data;
 	const $ = load(html);
-	const today = DateTime.now().toFormat("EEEE, MMMM d");
+	const today = DateTime.now()
+		.setZone("America/New_York")
+		.toFormat("EEEE, MMMM d");
 	const todaysSection = $("p strong")
 		.filter((_, element) => $(element).text().trim() === today)
 		.parent();

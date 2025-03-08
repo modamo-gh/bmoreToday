@@ -12,14 +12,17 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 		useState(true);
 	const [isEnochPrattLibraryChecked, setIsEnochPrattLibraryChecked] =
 		useState(true);
+	const [isBaltimoreBeatChecked, setIsBaltimoreBeatChecked] = useState(true);
 
 	return (
 		<EventContext.Provider
 			value={{
 				filteredEvents,
+				isBaltimoreBeatChecked,
 				isBaltimoreMagazineChecked,
 				isBaltimoreShowplaceChecked,
 				isEnochPrattLibraryChecked,
+				setIsBaltimoreBeatChecked,
 				setFilteredEvents,
 				setIsBaltimoreMagazineChecked,
 				setIsBaltimoreShowplaceChecked,
