@@ -9,6 +9,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isEnochPrattLibraryChecked,
+		setIsBaltimoreBeatChecked,
 		setIsBaltimoreMagazineChecked,
 		setIsBaltimoreShowplaceChecked,
 		setIsEnochPrattLibraryChecked
@@ -29,7 +30,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 					disabled={false}
 					label={"Baltimore Beat"}
 					onChange={() => {
-						setIsBaltimoreMagazineChecked((prev) => !prev);
+						setIsBaltimoreBeatChecked((prev) => !prev);
 					}}
 					width={width}
 				/>
