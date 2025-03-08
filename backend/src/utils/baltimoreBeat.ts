@@ -102,7 +102,7 @@ const getBaltimoreBeatEvents = async (url: string) => {
 	return events;
 };
 
-export const getEvents = async () => {
+export const getBBEvents = async () => {
 	const urls = await getBaltimoreBeatURLs();
 
 	for (const url of Object.values(urls)) {
