@@ -34,7 +34,57 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 					)
 				}
 			>
-				<h3 className="text-center text-[#f5f5f5] text-lg">Filter</h3>
+				{expandedSection !== "Filter" ? (
+					<h3 className="text-center text-[#f5f5f5] text-lg">
+						Filter
+					</h3>
+				) : (
+					<div className="h-full flex flex-col">
+						<SourceFilterCheckbox
+							checked={isBaltimoreBeatChecked}
+							disabled={false}
+							label={"Baltimore Beat"}
+							onChange={() => {
+								setIsBaltimoreBeatChecked((prev) => !prev);
+							}}
+							width={width}
+						/>
+						<SourceFilterCheckbox
+							checked={isBaltimoreMagazineChecked}
+							disabled={false}
+							label={"Baltimore Magazine"}
+							onChange={() => {
+								setIsBaltimoreMagazineChecked((prev) => !prev);
+							}}
+							width={width}
+						/>
+						<SourceFilterCheckbox
+							checked={isBaltimoreShowplaceChecked}
+							disabled={false}
+							label={"Baltimore Showplace"}
+							onChange={() => {
+								setIsBaltimoreShowplaceChecked((prev) => !prev);
+							}}
+							width={width}
+						/>
+						<SourceFilterCheckbox
+							checked={false}
+							disabled
+							label={"Bmore Art"}
+							onChange={() => {}}
+							width={width}
+						/>
+						<SourceFilterCheckbox
+							checked={isEnochPrattLibraryChecked}
+							disabled={false}
+							label={"Enoch Pratt Library"}
+							onChange={() => {
+								setIsEnochPrattLibraryChecked((prev) => !prev);
+							}}
+							width={width}
+						/>
+					</div>
+				)}
 			</div>
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
@@ -46,7 +96,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 					)
 				}
 			>
-				<h3 className="text-center text-[#f5f5f5] text-lg">Sort</h3>
+				{expandedSection !== "Sort" ? (
+					<h3 className="text-center text-[#f5f5f5] text-lg">Sort</h3>
+				) : null}
 			</div>
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
@@ -58,57 +110,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 					)
 				}
 			>
-				<h3 className="text-center text-[#f5f5f5] text-lg">
-					Preferences
-				</h3>
+				{expandedSection !== "Preferences" ? (
+					<h3 className="text-center text-[#f5f5f5] text-lg">
+						Preferences
+					</h3>
+				) : null}
 			</div>
-			{/* <div
-				className={`flex flex-row gap-2 h-full md:gap-0 lg:flex-col lg:overflow-x-hidden overflow-x-scroll whitespace-nowrap`}
-			>
-				<SourceFilterCheckbox
-					checked={isBaltimoreBeatChecked}
-					disabled={false}
-					label={"Baltimore Beat"}
-					onChange={() => {
-						setIsBaltimoreBeatChecked((prev) => !prev);
-					}}
-					width={width}
-				/>
-				<SourceFilterCheckbox
-					checked={isBaltimoreMagazineChecked}
-					disabled={false}
-					label={"Baltimore Magazine"}
-					onChange={() => {
-						setIsBaltimoreMagazineChecked((prev) => !prev);
-					}}
-					width={width}
-				/>
-				<SourceFilterCheckbox
-					checked={isBaltimoreShowplaceChecked}
-					disabled={false}
-					label={"Baltimore Showplace"}
-					onChange={() => {
-						setIsBaltimoreShowplaceChecked((prev) => !prev);
-					}}
-					width={width}
-				/>
-				<SourceFilterCheckbox
-					checked={false}
-					disabled
-					label={"Bmore Art"}
-					onChange={() => {}}
-					width={width}
-				/>
-				<SourceFilterCheckbox
-					checked={isEnochPrattLibraryChecked}
-					disabled={false}
-					label={"Enoch Pratt Library"}
-					onChange={() => {
-						setIsEnochPrattLibraryChecked((prev) => !prev);
-					}}
-					width={width}
-				/>
-			</div> */}
 		</div>
 	);
 };
