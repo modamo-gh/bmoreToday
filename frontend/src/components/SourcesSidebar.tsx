@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useEventContext } from "../contexts/EventContext";
 import { SourcesSidebarProps } from "../types/SourcesSidebarProps";
 import SourceFilterCheckbox from "./SourceFilterCheckbox";
+import { FaFilter, FaGears, FaSliders, FaSort } from "react-icons/fa6";
 
 const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	const {
@@ -20,9 +21,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	return (
 		<div className="bg-[#232130] flex flex-row gap-4 lg:flex-col lg:max-h-full lg:w-1/5 items-center p-4 rounded-lg w-full">
 			{width >= 768 && (
-				<h2 className="text-center text-[#f5f5f5] text-lg p-4">
-					Settings
-				</h2>
+				<div className="flex flex-row items-center justify-center text-lg">
+					<FaGears className="text-[#ff6a00]" />
+					<h2 className="text-center text-[#f5f5f5] p-4">Settings</h2>
+				</div>
 			)}
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
@@ -35,9 +37,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				}
 			>
 				{expandedSection !== "Filter" ? (
-					<h3 className="text-center text-[#f5f5f5] text-lg">
-						Filter
-					</h3>
+					<div className="flex flex-row items-center justify-center text-lg">
+						<FaFilter className="text-[#ff6a00]" />
+						<h2 className="text-center text-[#f5f5f5] p-4">
+							Filter
+						</h2>
+					</div>
 				) : (
 					<div className="h-full flex flex-col">
 						<SourceFilterCheckbox
@@ -97,7 +102,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				}
 			>
 				{expandedSection !== "Sort" ? (
-					<h3 className="text-center text-[#f5f5f5] text-lg">Sort</h3>
+					<div className="flex flex-row items-center justify-center text-lg">
+						<FaSort className="text-[#ff6a00]" />
+						<h2 className="text-center text-[#f5f5f5] p-4">Sort</h2>
+					</div>
 				) : null}
 			</div>
 			<div
@@ -111,9 +119,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				}
 			>
 				{expandedSection !== "Preferences" ? (
-					<h3 className="text-center text-[#f5f5f5] text-lg">
-						Preferences
-					</h3>
+					<div className="flex flex-row items-center justify-center text-lg">
+						<FaSliders className="text-[#ff6a00]" />
+						<h2 className="text-center text-[#f5f5f5] p-4">
+							Preferences
+						</h2>
+					</div>
 				) : null}
 			</div>
 		</div>
