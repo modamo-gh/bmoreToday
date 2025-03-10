@@ -40,14 +40,29 @@ const App = () => {
 	}, []);
 
 	useEffect(() => {
+		const mascots = [
+			"/assets/natty.png",
+			"/assets/oriole.png",
+			"/assets/raven.png",
+			"/assets/utz.png"
+		];
+		let mascotIndex = 0;
+
 		const fetchEvents = async () => {
 			try {
 				const response = await fetch(
 					"https://bmoretoday.modamo.xyz/api/events"
 				);
-				const data = await response.json();
+				const data: Event[] = await response.json();
 
-				console.log("Fetched Events:", data);
+				for (const event of data) {
+					if (!event.imageurl) {
+						event.imageurl = mascots[mascotIndex];
+						mascotIndex = (mascotIndex + 1) % mascots.length;
+
+						console.log(event);
+					}
+				}
 
 				setEvents(data);
 			} catch (error) {
