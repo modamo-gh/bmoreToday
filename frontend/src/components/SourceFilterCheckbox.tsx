@@ -15,6 +15,7 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 				checked={checked}
 				className="accent-[#ff6a00] cursor-pointer h-5 rounded w-5"
 				onChange={onChange}
+				onClick={(event) => event.stopPropagation()}
 				type="checkbox"
 			/>
 			<span className="flex-1 text-[#f5f5f5]">{label}</span>
@@ -23,9 +24,7 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 		<p
 			className={`${
 				checked ? "bg-[#ff6a00]" : "bg-[#232130]"
-			} p-1 rounded-sm ${
-				checked ? "text-[#232130]":  "text-[#f5f5f5]"
-			}`}
+			} p-1 rounded-sm ${checked ? "text-[#232130]" : "text-[#f5f5f5]"}`}
 			onClick={onChange}
 		>
 			{label}
