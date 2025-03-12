@@ -12,4 +12,6 @@ export type EventContextType = {
 	setIsBaltimoreMagazineChecked: Dispatch<SetStateAction<boolean>>;
 	setIsBaltimoreShowplaceChecked: Dispatch<SetStateAction<boolean>>;
 	setIsEnochPrattLibraryChecked: Dispatch<SetStateAction<boolean>>;
+	setSortSetting: Dispatch<SetStateAction<string>>;
+	sortSetting: string;
 };

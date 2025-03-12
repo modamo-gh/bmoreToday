@@ -8,11 +8,13 @@ import { Event } from "./types/Event";
 
 const App = () => {
 	const {
+		filteredEvents,
 		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isEnochPrattLibraryChecked,
-		setFilteredEvents
+		setFilteredEvents,
+		sortSetting
 	} = useEventContext();
 
 	const [events, setEvents] = useState<Event[]>();
@@ -123,6 +125,33 @@ const App = () => {
 		isEnochPrattLibraryChecked,
 		setFilteredEvents
 	]);
+
+	useEffect(() => {
+		if (filteredEvents) {
+			const sortedEvents = [...filteredEvents];
+
+			switch (sortSetting) {
+				case "aToZ":
+					sortedEvents.sort((a, b) =>
+						a.title
+							.toLowerCase()
+							.localeCompare(b.title.toLowerCase())
+					);
+					break;
+				case "zToA":
+					sortedEvents.sort((a, b) =>
+						b.title
+							.toLowerCase()
+							.localeCompare(a.title.toLowerCase())
+					);
+					break;
+				default:
+					break;
+			}
+
+			setFilteredEvents(sortedEvents);
+		}
+	}, [sortSetting]);
 
 	return (
 		<div className="bg-[#1c1a29] flex flex-col gap-8 h-screen max-w-screen p-8">

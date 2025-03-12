@@ -13,7 +13,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		setIsBaltimoreBeatChecked,
 		setIsBaltimoreMagazineChecked,
 		setIsBaltimoreShowplaceChecked,
-		setIsEnochPrattLibraryChecked
+		setIsEnochPrattLibraryChecked,
+		setSortSetting,
+		sortSetting
 	} = useEventContext();
 
 	const [expandedSection, setExpandedSection] = useState("");
@@ -106,7 +108,49 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 						<FaSort className="text-[#ff6a00]" />
 						<h2 className="text-center text-[#f5f5f5] p-4">Sort</h2>
 					</div>
-				) : null}
+				) : (
+					<div className="h-full flex flex-col">
+						<label className="flex flex-1 gap-2 items-center px-4 w-full">
+							<input
+								checked={sortSetting === "default"}
+								onClick={(event) => {
+									event.stopPropagation();
+									setSortSetting("default");
+								}}
+								type="radio"
+							/>
+							<span className="flex-1 text-[#f5f5f5]">
+								Default
+							</span>
+						</label>
+						<label className="flex flex-1 gap-2 items-center px-4 w-full">
+							<input
+								checked={sortSetting === "aToZ"}
+								onClick={(event) => {
+									event.stopPropagation();
+									setSortSetting("aToZ");
+								}}
+								type="radio"
+							/>
+							<span className="flex-1 text-[#f5f5f5]">
+								A to Z
+							</span>
+						</label>
+						<label className="flex flex-1 gap-2 items-center px-4 w-full">
+							<input
+								checked={sortSetting === "zToA"}
+								onClick={(event) => {
+									event.stopPropagation();
+									setSortSetting("zToA");
+								}}
+								type="radio"
+							/>
+							<span className="flex-1 text-[#f5f5f5]">
+								Z to A
+							</span>
+						</label>
+					</div>
+				)}
 			</div>
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${

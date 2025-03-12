@@ -13,6 +13,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 	const [isEnochPrattLibraryChecked, setIsEnochPrattLibraryChecked] =
 		useState(true);
 	const [isBaltimoreBeatChecked, setIsBaltimoreBeatChecked] = useState(true);
+	const [sortSetting, setSortSetting] = useState("default");
 
 	return (
 		<EventContext.Provider
@@ -26,7 +27,9 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 				setFilteredEvents,
 				setIsBaltimoreMagazineChecked,
 				setIsBaltimoreShowplaceChecked,
-				setIsEnochPrattLibraryChecked
+				setIsEnochPrattLibraryChecked,
+				setSortSetting,
+				sortSetting,
 			}}
 		>
 			{children}
