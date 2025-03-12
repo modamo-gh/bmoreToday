@@ -5,12 +5,12 @@ const weatherRouter = Router();
 const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 const LATITUDE = 39.2908816;
 const LONGITUDE = -76.610759;
-const UNITS = "imperial";
 
 weatherRouter.get("/", async (req: Request, res: Response) => {
 	try {
+		const { units } = req.query;
 		const response = await fetch(
-			`https://api.openweathermap.org/data/3.0/onecall?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${OPENWEATHER_API_KEY}&units=${UNITS}`
+			`https://api.openweathermap.org/data/3.0/onecall?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${OPENWEATHER_API_KEY}&units=${units}`
 		);
 
 		if (!response.ok) {

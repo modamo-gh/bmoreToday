@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { HeaderProps } from "../types/HeaderProps";
 import { Weather } from "../types/Weather";
 import { DateTime } from "luxon";
+import { usePreferencesContext } from "../contexts/PreferencesContext";
 
 const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 	const [weather, setWeather] = useState<Weather>({
@@ -9,11 +10,14 @@ const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 		feels_like: 0,
 		icon_URL: ""
 	});
+	const { useFahrenheit } = usePreferencesContext();
 
 	useEffect(() => {
 		const fetchWeather = async () => {
 			const response = await fetch(
-				"https://bmoretoday.modamo.xyz/api/weather"
+				`https://bmoretoday.modamo.xyz/api/weather?units=${
+					useFahrenheit ? "imperial" : "metric"
+				}`
 			);
 			const data = await response.json();
 

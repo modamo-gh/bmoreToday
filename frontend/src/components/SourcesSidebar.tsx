@@ -4,6 +4,7 @@ import { SourcesSidebarProps } from "../types/SourcesSidebarProps";
 import SourceFilterCheckbox from "./SourceFilterCheckbox";
 import { FaFilter, FaGears, FaSliders, FaSort } from "react-icons/fa6";
 import SourceSortRadio from "./SourceSortRadio";
+import { usePreferencesContext } from "../contexts/PreferencesContext";
 
 const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	const {
@@ -16,6 +17,8 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		setIsBaltimoreShowplaceChecked,
 		setIsEnochPrattLibraryChecked
 	} = useEventContext();
+
+	const { setUseFahrenheit, useFahrenheit } = usePreferencesContext();
 
 	const [expandedSection, setExpandedSection] = useState("");
 
@@ -125,8 +128,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				)}
 			</div>
 			<div
-				className={`bg-[#1c1a29] cursor-pointer flex ${
-					expandedSection === "Preferences" ? "flex-[8]" : "flex-1"
+				className={`bg-[#1c1a29] flex ${
+					expandedSection === "Preferences"
+						? "flex-[8]"
+						: "cursor-pointer flex-1"
 				} items-center justify-center rounded-lg w-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
@@ -141,7 +146,30 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 							Preferences
 						</h2>
 					</div>
-				) : null}
+				) : (
+					<label
+						className="cursor-pointer flex items-center gap-2"
+						onClick={(event) => event.stopPropagation()}
+					>
+						<span className="text-[#f5f5f5]">°C</span>
+						<input
+							checked={useFahrenheit}
+							className="hidden"
+							onChange={() => setUseFahrenheit((prev) => !prev)}
+							type="checkbox"
+						/>
+						<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">
+							<div
+								className={`bg-white h-4 rounded-full transition-transform ${
+									useFahrenheit
+										? "translate-x-6"
+										: "translate-x-0"
+								} w-4`}
+							/>
+						</div>
+						<span className="text-[#f5f5f5]">°F</span>
+					</label>
+				)}
 			</div>
 		</div>
 	);
