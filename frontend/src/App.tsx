@@ -8,7 +8,6 @@ import { Event } from "./types/Event";
 
 const App = () => {
 	const {
-		filteredEvents,
 		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
