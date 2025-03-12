@@ -25,7 +25,7 @@ const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 		};
 
 		fetchWeather();
-	}, []);
+	}, [useFahrenheit]);
 
 	return (
 		<div
