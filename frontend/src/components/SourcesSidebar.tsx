@@ -3,6 +3,7 @@ import { useEventContext } from "../contexts/EventContext";
 import { SourcesSidebarProps } from "../types/SourcesSidebarProps";
 import SourceFilterCheckbox from "./SourceFilterCheckbox";
 import { FaFilter, FaGears, FaSliders, FaSort } from "react-icons/fa6";
+import SourceSortRadio from "./SourceSortRadio";
 
 const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	const {
@@ -13,12 +14,16 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		setIsBaltimoreBeatChecked,
 		setIsBaltimoreMagazineChecked,
 		setIsBaltimoreShowplaceChecked,
-		setIsEnochPrattLibraryChecked,
-		setSortSetting,
-		sortSetting
+		setIsEnochPrattLibraryChecked
 	} = useEventContext();
 
 	const [expandedSection, setExpandedSection] = useState("");
+
+	const radioOptions = [
+		{ label: "Default", settingName: "default" },
+		{ label: "A to Z", settingName: "aToZ" },
+		{ label: "Z to A", settingName: "zToA" }
+	];
 
 	return (
 		<div className="bg-[#232130] flex flex-row gap-4 lg:flex-col lg:max-h-full lg:w-1/5 items-center p-4 rounded-lg w-full">
@@ -110,45 +115,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 					</div>
 				) : (
 					<div className="h-full flex flex-col">
-						<label className="flex flex-1 gap-2 items-center px-4 w-full">
-							<input
-								checked={sortSetting === "default"}
-								onClick={(event) => {
-									event.stopPropagation();
-									setSortSetting("default");
-								}}
-								type="radio"
+						{radioOptions.map((option) => (
+							<SourceSortRadio
+								label={option.label}
+								settingName={option.settingName}
 							/>
-							<span className="flex-1 text-[#f5f5f5]">
-								Default
-							</span>
-						</label>
-						<label className="flex flex-1 gap-2 items-center px-4 w-full">
-							<input
-								checked={sortSetting === "aToZ"}
-								onClick={(event) => {
-									event.stopPropagation();
-									setSortSetting("aToZ");
-								}}
-								type="radio"
-							/>
-							<span className="flex-1 text-[#f5f5f5]">
-								A to Z
-							</span>
-						</label>
-						<label className="flex flex-1 gap-2 items-center px-4 w-full">
-							<input
-								checked={sortSetting === "zToA"}
-								onClick={(event) => {
-									event.stopPropagation();
-									setSortSetting("zToA");
-								}}
-								type="radio"
-							/>
-							<span className="flex-1 text-[#f5f5f5]">
-								Z to A
-							</span>
-						</label>
+						))}
 					</div>
 				)}
 			</div>
