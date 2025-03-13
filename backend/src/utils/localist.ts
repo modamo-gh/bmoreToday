@@ -52,8 +52,8 @@ export const getLocalistEvents = async (baseURL: string) => {
 					price,
 					url,
 					imageURL,
-					startDateTime,
-					endDateTime
+					startDateTime.toFormat("HH:mm"),
+					endDateTime.toFormat("HH:mm") || null
 				]
 			);
 		}
