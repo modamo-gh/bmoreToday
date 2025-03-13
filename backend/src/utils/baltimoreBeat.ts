@@ -97,7 +97,9 @@ const getBaltimoreBeatEvents = async (url: string) => {
 			)?.[0];
 
 		if (time) {
-			const timeTokens = time.split("to").map((token) => token.trim());
+			const timeTokens = time
+				.split("to")
+				.map((token) => token.trim().replace(".", "").toUpperCase());
 
 			if (timeTokens[1] && timeTokens[1] === "noon") {
 				timeTokens[1] = "12:00 p.m.";
