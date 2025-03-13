@@ -103,17 +103,12 @@ const getBaltimoreBeatEvents = async (url: string) => {
 				timeTokens[1] = "12:00 p.m.";
 			}
 
-			event.startTime = DateTime.fromFormat(timeTokens[0], "hh:mm a");
+			event.startTime = DateTime.fromFormat(timeTokens[0], "h:mm a");
 
 			timeTokens.length === 2
-				? (event.endTime = DateTime.fromFormat(
-						timeTokens[1],
-						"hh:mm a"
-				  ))
+				? (event.endTime = DateTime.fromFormat(timeTokens[1], "h:mm a"))
 				: undefined;
 		}
-
-		console.log(event);
 
 		events.push(event);
 	});
