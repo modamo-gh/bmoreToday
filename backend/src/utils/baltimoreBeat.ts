@@ -113,6 +113,8 @@ const getBaltimoreBeatEvents = async (url: string) => {
 				: undefined;
 		}
 
+		console.log(event);
+
 		events.push(event);
 	});
 
