@@ -99,13 +99,16 @@ const getBaltimoreBeatEvents = async (url: string) => {
 		if (time) {
 			const timeTokens = time
 				.split("to")
-				.map((token) => token.trim().replace(".", "").toUpperCase());
+				.map((token) => token.trim().replace(/\./g, "").toUpperCase());
 
-			if (timeTokens[1] && timeTokens[1] === "noon") {
-				timeTokens[1] = "12:00 p.m.";
+			if (timeTokens[1] && timeTokens[1] === "NOON") {
+				timeTokens[1] = "12:00 PM";
 			}
 
-			event.startTime = DateTime.fromFormat(timeTokens[0], "h:mm a");
+			event.startTime = DateTime.fromFormat(timeTokens[0], "h:mm a")
+				.isValid
+				? DateTime.fromFormat(timeTokens[0], "h:mm a")
+				: DateTime.fromFormat(timeTokens[0], "h a");
 
 			timeTokens.length === 2
 				? (event.endTime = DateTime.fromFormat(timeTokens[1], "h:mm a"))
@@ -126,14 +129,15 @@ export const getBBEvents = async () => {
 
 		for (const event of events) {
 			await pool.query(
-				"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
+				"INSERT INTO events (title, location, price, source, startTime, endTime, time) VALUES ($1, $2, $3, $4, $5, $6, $7)",
 				[
 					event.title,
 					event.location,
 					event.price,
 					url || "Unknown",
 					event.startTime ? event.startTime.toFormat("HH:mm") : null,
-					event.endTime ? event.endTime.toFormat("HH:mm") : null
+					event.endTime ? event.endTime.toFormat("HH:mm") : null,
+					event.time ?? "Not Provided"
 				]
 			);
 		}
