@@ -61,7 +61,9 @@ const getBaltimoreBeatEvents = async (url: string) => {
 			title: "Not Provided",
 			location: "Not Provided",
 			time: "Not Provided",
-			price: "Not Provided"
+			price: "Not Provided",
+			startTime: null,
+			endTime: null
 		};
 
 		let title = $(element).find("a strong").text().trim();
@@ -95,7 +97,20 @@ const getBaltimoreBeatEvents = async (url: string) => {
 			)?.[0];
 
 		if (time) {
-			event.time = time;
+			const timeTokens = time.split("to").map((token) => token.trim());
+
+			if (timeTokens[1] && timeTokens[1] === "noon") {
+				timeTokens[1] = "12:00 p.m.";
+			}
+
+			event.startTime = DateTime.fromFormat(timeTokens[0], "hh:mm a");
+
+			timeTokens.length === 2
+				? (event.endTime = DateTime.fromFormat(
+						timeTokens[1],
+						"hh:mm a"
+				  ))
+				: undefined;
 		}
 
 		events.push(event);
@@ -112,13 +127,14 @@ export const getBBEvents = async () => {
 
 		for (const event of events) {
 			await pool.query(
-				"INSERT INTO events (title, location, time, price, source) VALUES ($1, $2, $3, $4, $5)",
+				"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
 				[
 					event.title,
 					event.location,
-					event.time,
 					event.price,
-					url || "Unknown"
+					url || "Unknown",
+					event.startTime ? event.startTime.toFormat("HH:mm") : null,
+					event.endTime ? event.endTime.toFormat("HH:mm") : null
 				]
 			);
 		}
