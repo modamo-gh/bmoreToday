@@ -53,7 +53,11 @@ export const getBaltShowPlaceEvents = async () => {
 		const title = event.slice(0, -3);
 
 		if (title.length) {
-			events.push({ title, time, price, location });
+			events.push({
+				title, time, price, location,
+				endTime: null,
+				startTime: null
+			});
 		}
 	});
 
