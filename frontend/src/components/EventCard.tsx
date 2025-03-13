@@ -47,8 +47,8 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 				<div className="flex items-center">
 					<FaClock className="mr-2 text-[#ff6a00] text-lg" />
 					<p className="flex-1 truncate">{`${
-						event.startTime ? event.startTime : event.time
-					}${event.endTime ? ` to ${event.endTime}` : ""}`}</p>
+						event.starttime ? event.starttime : event.time
+					}${event.endtime ? ` to ${event.endtime}` : ""}`}</p>
 				</div>
 			</div>
 		</div>
