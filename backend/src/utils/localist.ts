@@ -21,7 +21,7 @@ export const getLocalistEvents = async (baseURL: string) => {
 					: "Virtual Event";
 
 			const startTime =
-				event.event.event_instances[0].event_instance.start;
+				event.event.event_instances[0].event_instance.start || null;
 			const endTime =
 				event.event.event_instances[0].event_instance.end || null;
 
@@ -52,8 +52,8 @@ export const getLocalistEvents = async (baseURL: string) => {
 					price,
 					url,
 					imageURL,
-					startDateTime.toFormat("HH:mm"),
-					endDateTime.toFormat("HH:mm") || null
+					startDateTime?.toFormat("HH:mm") || null,
+					endDateTime?.toFormat("HH:mm") || null
 				]
 			);
 		}
