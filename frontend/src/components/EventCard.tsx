@@ -21,10 +21,7 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 			<div className="flex flex-col h-1/2 justify-between text-[#f5f5f5]">
 				<div className="flex items-center">
 					<FaTicket className="mr-2 text-[#ff6a00] text-lg" />
-					<p
-						className="flex-1 truncate"
-						title={event.title}
-					>
+					<p className="flex-1 truncate" title={event.title}>
 						{event.title}
 					</p>
 				</div>
@@ -49,7 +46,9 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 				</div>
 				<div className="flex items-center">
 					<FaClock className="mr-2 text-[#ff6a00] text-lg" />
-					<p className="flex-1 truncate">{event.time}</p>
+					<p className="flex-1 truncate">{`${
+						event.startTime ? event.startTime : event.time
+					}${event.endTime ?? ` to ${event.endTime}`}`}</p>
 				</div>
 			</div>
 		</div>
