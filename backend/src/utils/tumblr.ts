@@ -46,7 +46,14 @@ export const getBaltShowPlaceEvents = async () => {
 
 		const timeRegex = /((\d+:)?\d+(A|P)M)/;
 		const timeMatch = event.match(timeRegex);
-		const time = timeMatch ? timeMatch[1].trim() : "Unknown";
+
+		let startTime = null;
+
+		if (timeMatch) {
+			startTime = DateTime.fromFormat(timeMatch[1], "h:mma").isValid
+				? DateTime.fromFormat(timeMatch[1], "h:mma")
+				: DateTime.fromFormat(timeMatch[1], "ha");
+		}
 
 		event = event.replace(timeRegex, "").trim();
 
@@ -54,22 +61,27 @@ export const getBaltShowPlaceEvents = async () => {
 
 		if (title.length) {
 			events.push({
-				title, time, price, location,
+				title,
+				time: "",
+				price,
+				location,
 				endTime: null,
-				startTime: null
+				startTime
 			});
 		}
 	});
 
 	for (const event of events) {
 		await pool.query(
-			"INSERT INTO events (title, location, time, price, source) VALUES ($1, $2, $3, $4, $5)",
+			"INSERT INTO events (title, location, time, price, source) VALUES ($1, $2, $3, $4, $5, $6, $7)",
 			[
 				event.title,
 				event.location,
-				event.time,
+				"",
 				event.price,
-				blogIdentifier || "Unknown"
+				blogIdentifier || "Unknown",
+				event.startTime,
+				event.endTime
 			]
 		);
 	}
