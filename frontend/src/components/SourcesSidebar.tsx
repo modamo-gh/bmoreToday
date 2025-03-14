@@ -18,7 +18,8 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		setIsEnochPrattLibraryChecked
 	} = useEventContext();
 
-	const { setUseFahrenheit, useFahrenheit } = usePreferencesContext();
+	const { setUse12Hours, setUseFahrenheit, use12Hours, useFahrenheit } =
+		usePreferencesContext();
 
 	const [expandedSection, setExpandedSection] = useState("");
 
@@ -147,28 +148,56 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 						</h2>
 					</div>
 				) : (
-					<label
-						className="cursor-pointer flex items-center gap-2"
-						onClick={(event) => event.stopPropagation()}
-					>
-						<span className="text-[#f5f5f5]">°C</span>
-						<input
-							checked={useFahrenheit}
-							className="hidden"
-							onChange={() => setUseFahrenheit((prev) => !prev)}
-							type="checkbox"
-						/>
-						<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">
-							<div
-								className={`bg-white h-4 rounded-full transition-transform ${
-									useFahrenheit
-										? "translate-x-6"
-										: "translate-x-0"
-								} w-4`}
+					<div className="flex flex-col flex-1 h-full items-center">
+						<label
+							className="cursor-pointer flex flex-1 items-center gap-2"
+							onClick={(event) => event.stopPropagation()}
+						>
+							<span className="text-[#f5f5f5]">°C</span>
+							<input
+								checked={useFahrenheit}
+								className="hidden"
+								onChange={() =>
+									setUseFahrenheit((prev) => !prev)
+								}
+								type="checkbox"
 							/>
-						</div>
-						<span className="text-[#f5f5f5]">°F</span>
-					</label>
+							<div className="bg-[#ff6a00] flex  h-6 items-center p-1 rounded-full w-12">
+								<div
+									className={`bg-white h-4 rounded-full transition-transform ${
+										useFahrenheit
+											? "translate-x-6"
+											: "translate-x-0"
+									} w-4`}
+								/>
+							</div>
+							<span className="text-[#f5f5f5]">°F</span>
+						</label>
+						<label
+							className="cursor-pointer flex flex-1 items-center gap-2"
+							onClick={(event) => event.stopPropagation()}
+						>
+							<span className="text-[#f5f5f5]">12 hr</span>
+							<input
+								checked={use12Hours}
+								className="hidden"
+								onChange={() =>
+									setUseFahrenheit((prev) => !prev)
+								}
+								type="checkbox"
+							/>
+							<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">
+								<div
+									className={`bg-white h-4 rounded-full transition-transform ${
+										use12Hours
+											? "translate-x-0"
+											: "translate-x-6"
+									} w-4`}
+								/>
+							</div>
+							<span className="text-[#f5f5f5]">24 hr</span>
+						</label>
+					</div>
 				)}
 			</div>
 		</div>

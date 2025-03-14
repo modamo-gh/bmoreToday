@@ -7,8 +7,11 @@ import {
 	FaWallet
 } from "react-icons/fa6";
 import { EventCardType } from "../types/EventCardType";
+import { usePreferencesContext } from "../contexts/PreferencesContext";
 
 const EventCard: FC<EventCardType> = ({ event }) => {
+	const { setUse12Hours, use12Hours } = usePreferencesContext();
+
 	return (
 		<div className=" bg-[#30255C] flex flex-col gap-2 h-80 rounded-lg p-2">
 			<div className="h-1/2 rounded-lg overflow-hidden">
@@ -47,8 +50,18 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 				<div className="flex items-center">
 					<FaClock className="mr-2 text-[#ff6a00] text-lg" />
 					<p className="flex-1 truncate">{`${
-						event.starttime ? event.starttime : event.time
-					}${event.endtime ? ` to ${event.endtime}` : ""}`}</p>
+						use12Hours
+							? event.starttime?.toFormat("hh:mm a")
+							: event.starttime?.toFormat("HH:mm")
+					}${
+						event.endtime
+							? ` to ${
+									use12Hours
+										? event.endtime.toFormat("hh:mm a")
+										: event.endtime.toFormat("HH:mm")
+							  }`
+							: ""
+					}`}</p>
 				</div>
 			</div>
 		</div>
