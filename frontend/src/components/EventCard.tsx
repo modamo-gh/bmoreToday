@@ -72,7 +72,7 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 									? use12Hours
 										? startTime.toFormat("hh:mm a")
 										: startTime.toFormat("HH:mm")
-									: null
+									: "Not Provided"
 							}${
 								endTime
 									? ` to ${
