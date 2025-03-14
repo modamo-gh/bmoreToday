@@ -18,7 +18,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		setIsEnochPrattLibraryChecked
 	} = useEventContext();
 
-	const { setUseFahrenheit, use12Hours, useFahrenheit } =
+	const { setUse12Hours, setUseFahrenheit, use12Hours, useFahrenheit } =
 		usePreferencesContext();
 
 	const [expandedSection, setExpandedSection] = useState("");
@@ -181,9 +181,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 							<input
 								checked={use12Hours}
 								className="hidden"
-								onChange={() =>
-									setUseFahrenheit((prev) => !prev)
-								}
+								onChange={() => setUse12Hours((prev) => !prev)}
 								type="checkbox"
 							/>
 							<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">

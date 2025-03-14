@@ -8,9 +8,12 @@ import {
 } from "react-icons/fa6";
 import { EventCardType } from "../types/EventCardType";
 import { usePreferencesContext } from "../contexts/PreferencesContext";
+import { DateTime } from "luxon";
 
 const EventCard: FC<EventCardType> = ({ event }) => {
 	const { use12Hours } = usePreferencesContext();
+
+	console.log(event);
 
 	return (
 		<div className=" bg-[#30255C] flex flex-col gap-2 h-80 rounded-lg p-2">
@@ -49,19 +52,38 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 				</div>
 				<div className="flex items-center">
 					<FaClock className="mr-2 text-[#ff6a00] text-lg" />
-					<p className="flex-1 truncate">{`${
-						use12Hours
-							? event.starttime?.toFormat("hh:mm a")
-							: event.starttime?.toFormat("HH:mm")
-					}${
-						event.endtime
-							? ` to ${
-									use12Hours
-										? event.endtime.toFormat("hh:mm a")
-										: event.endtime.toFormat("HH:mm")
-							  }`
-							: ""
-					}`}</p>
+					<p className="flex-1 truncate">
+						{(() => {
+							const startTime = event.starttime
+								? DateTime.fromFormat(
+										event.starttime.toString(),
+										"HH:mm:ss"
+								  )
+								: null;
+							const endTime = event.endtime
+								? DateTime.fromFormat(
+										event.endtime.toString(),
+										"HH:mm:ss"
+								  )
+								: null;
+
+							return `${
+								startTime
+									? use12Hours
+										? startTime.toFormat("hh:mm a")
+										: startTime.toFormat("HH:mm")
+									: null
+							}${
+								endTime
+									? ` to ${
+											use12Hours
+												? endTime.toFormat("hh:mm a")
+												: endTime.toFormat("HH:mm")
+									  }`
+									: ""
+							}`;
+						})()}
+					</p>
 				</div>
 			</div>
 		</div>
