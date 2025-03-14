@@ -26,7 +26,8 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	const radioOptions = [
 		{ label: "Default", settingName: "default" },
 		{ label: "A to Z", settingName: "aToZ" },
-		{ label: "Z to A", settingName: "zToA" }
+		{ label: "Z to A", settingName: "zToA" },
+		{ label: "Earliest to Latest", settingName: "earliestToLatest" }
 	];
 
 	return (
@@ -118,7 +119,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 						<h2 className="text-center text-[#f5f5f5] p-4">Sort</h2>
 					</div>
 				) : (
-					<div className="h-full flex flex-col">
+					<div className="flex flex-col h-full">
 						{radioOptions.map((option) => (
 							<SourceSortRadio
 								label={option.label}
