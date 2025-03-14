@@ -18,7 +18,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		setIsEnochPrattLibraryChecked
 	} = useEventContext();
 
-	const { setUse12Hours, setUseFahrenheit, use12Hours, useFahrenheit } =
+	const { setUseFahrenheit, use12Hours, useFahrenheit } =
 		usePreferencesContext();
 
 	const [expandedSection, setExpandedSection] = useState("");

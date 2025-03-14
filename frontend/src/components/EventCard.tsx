@@ -10,7 +10,7 @@ import { EventCardType } from "../types/EventCardType";
 import { usePreferencesContext } from "../contexts/PreferencesContext";
 
 const EventCard: FC<EventCardType> = ({ event }) => {
-	const { setUse12Hours, use12Hours } = usePreferencesContext();
+	const { use12Hours } = usePreferencesContext();
 
 	return (
 		<div className=" bg-[#30255C] flex flex-col gap-2 h-80 rounded-lg p-2">
