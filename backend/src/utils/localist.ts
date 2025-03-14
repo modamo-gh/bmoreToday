@@ -44,11 +44,10 @@ export const getLocalistEvents = async (baseURL: string) => {
 			const imageURL = event.event.photo_url;
 
 			await pool.query(
-				"INSERT INTO events (title, location, time, price, source, imageURL, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+				"INSERT INTO events (title, location, price, source, imageURL, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6, $7)",
 				[
 					title,
 					location,
-					"time",
 					price,
 					url,
 					imageURL,

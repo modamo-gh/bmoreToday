@@ -60,7 +60,6 @@ const getBaltimoreBeatEvents = async (url: string) => {
 		const event: Event = {
 			title: "Not Provided",
 			location: "Not Provided",
-			time: "Not Provided",
 			price: "Not Provided",
 			startTime: null,
 			endTime: null
@@ -129,15 +128,14 @@ export const getBBEvents = async () => {
 
 		for (const event of events) {
 			await pool.query(
-				"INSERT INTO events (title, location, price, source, startTime, endTime, time) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+				"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
 				[
 					event.title,
 					event.location,
 					event.price,
 					url || "Unknown",
 					event.startTime ? event.startTime.toFormat("HH:mm") : null,
-					event.endTime ? event.endTime.toFormat("HH:mm") : null,
-					event.time ?? "Not Provided"
+					event.endTime ? event.endTime.toFormat("HH:mm") : null
 				]
 			);
 		}

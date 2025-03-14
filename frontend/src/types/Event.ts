@@ -9,6 +9,5 @@ export type Event = {
 	price: string;
 	source: string;
 	starttime: DateTime | null;
-	time: string;
 	title: string;
 };

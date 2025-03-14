@@ -62,7 +62,6 @@ export const getBaltShowPlaceEvents = async () => {
 		if (title.length) {
 			events.push({
 				title,
-				time: "",
 				price,
 				location,
 				endTime: null,
@@ -73,11 +72,10 @@ export const getBaltShowPlaceEvents = async () => {
 
 	for (const event of events) {
 		await pool.query(
-			"INSERT INTO events (title, location, time, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+			"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
 			[
 				event.title,
 				event.location,
-				"",
 				event.price,
 				`https://${blogIdentifier}` || "Unknown",
 				event.startTime?.toFormat("HH:mm") || null,

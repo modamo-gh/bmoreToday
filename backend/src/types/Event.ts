@@ -5,6 +5,5 @@ export type Event = {
 	title: string;
 	location: string;
 	startTime: DateTime | null;
-	time: string;
 	price: string;
 };
