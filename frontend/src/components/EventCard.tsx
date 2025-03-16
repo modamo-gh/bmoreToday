@@ -13,8 +13,19 @@ import { DateTime } from "luxon";
 const EventCard: FC<EventCardType> = ({ event }) => {
 	const { use12Hours } = usePreferencesContext();
 
-	console.log(event);
+	const getDisplayedPrice = () => {
+		let price = "";
 
+		(event.price && (price = event.price)) ||
+			(event.minPrice !== null && (price = `$${event.minPrice}`)) ||
+			(event.maxPrice !== null &&
+				event.maxPrice &&
+				(price += ` to ${event.maxPrice}`)) ||
+			(event.priceDescription && (price = event.priceDescription));
+
+		return price;
+	};
+	
 	return (
 		<div className=" bg-[#30255C] flex flex-col gap-2 h-80 rounded-lg p-2">
 			<div className="h-1/2 rounded-lg overflow-hidden">
@@ -37,7 +48,7 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 				</div>
 				<div className="flex items-center">
 					<FaWallet className="mr-2 text-[#ff6a00] text-lg" />
-					<p className="flex-1 truncate">{event.price}</p>
+					<p className="flex-1 truncate">{getDisplayedPrice()}</p>
 				</div>
 				<div className="flex items-center">
 					<FaGlobe className="mr-2 text-[#ff6a00] text-lg" />
