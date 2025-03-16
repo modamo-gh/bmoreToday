@@ -137,14 +137,14 @@ export const getBBEvents = async () => {
 						event.price,
 						url || "Unknown",
 						event.startTime
-							? event.startTime.toFormat("HH:mm")
+							? event.startTime.toSQLTime()
 							: null,
-						event.endTime ? event.endTime.toFormat("HH:mm") : null
+						event.endTime ? event.endTime.toSQLTime() : null
 					]
 				);
 			} catch (error) {
 				await sendTelegramError(
-					`🚨 *Baltimore Bear Insertion Error* 🚨\n\nEvent:\n\`${JSON.stringify(
+					`🚨 *Baltimore Beat Insertion Error* 🚨\n\nEvent:\n\`${JSON.stringify(
 						event,
 						null,
 						4
