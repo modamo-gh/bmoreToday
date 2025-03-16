@@ -3,6 +3,7 @@ import { load } from "cheerio";
 import { DateTime } from "luxon";
 import { Event } from "../types/Event";
 import pool from "../../db";
+import { sendTelegramError } from "../scripts/telegram";
 
 const getBaltimoreBeatURLs = async () => {
 	const response = await axios.get(
@@ -127,17 +128,29 @@ export const getBBEvents = async () => {
 		const events = await getBaltimoreBeatEvents(url);
 
 		for (const event of events) {
-			await pool.query(
-				"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
-				[
-					event.title,
-					event.location,
-					event.price,
-					url || "Unknown",
-					event.startTime ? event.startTime.toFormat("HH:mm") : null,
-					event.endTime ? event.endTime.toFormat("HH:mm") : null
-				]
-			);
+			try {
+				await pool.query(
+					"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
+					[
+						event.title,
+						event.location,
+						event.price,
+						url || "Unknown",
+						event.startTime
+							? event.startTime.toFormat("HH:mm")
+							: null,
+						event.endTime ? event.endTime.toFormat("HH:mm") : null
+					]
+				);
+			} catch (error) {
+				await sendTelegramError(
+					`🚨 *Baltimore Bear Insertion Error* 🚨\n\nEvent:\n\`${JSON.stringify(
+						event,
+						null,
+						4
+					)}\`\n\nError:\n\`${error}\``
+				);
+			}
 		}
 	}
 };
