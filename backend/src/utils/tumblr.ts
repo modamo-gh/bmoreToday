@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { configDotenv } from "dotenv";
 import pool from "../../db";
 import { Event } from "../types/Event";
+import { sendTelegramError } from "../scripts/telegram";
 
 configDotenv();
 
@@ -71,16 +72,26 @@ export const getBaltShowPlaceEvents = async () => {
 	});
 
 	for (const event of events) {
-		await pool.query(
-			"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
-			[
-				event.title,
-				event.location,
-				event.price,
-				`https://${blogIdentifier}` || "Unknown",
-				event.startTime?.toFormat("HH:mm") || null,
-				event.endTime?.toFormat("HH:mm") || null
-			]
-		);
+		try {
+			await pool.query(
+				"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
+				[
+					event.title,
+					event.location,
+					event.price,
+					`https://${blogIdentifier}` || "Unknown",
+					event.startTime?.toFormat("HH:mm") || null,
+					event.endTime?.toFormat("HH:mm") || null
+				]
+			);
+		} catch (error) {
+			await sendTelegramError(
+				`🚨 *BaltShowPlace Insertion Error* 🚨\n\nEvent:\n\`${JSON.stringify(
+					event,
+					null,
+					4
+				)}\`\n\nError:\n\`${error}\``
+			);
+		}
 	}
 };

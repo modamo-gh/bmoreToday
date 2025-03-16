@@ -13,13 +13,6 @@ const fetchEvents = async () => {
 		await getBBEvents();
 	} catch (error) {
 		console.error("Error during cron job:", error);
-		
-		if(error instanceof Error){
-			await sendTelegramError(error.message)
-		}
-		else{
-			await sendTelegramError("An unknown error occurred")
-		}
 	} finally {
 		await pool.end();
 	}
