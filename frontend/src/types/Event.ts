@@ -6,10 +6,10 @@ export type Event = {
 	id: number;
 	imageurl: string;
 	location: string;
-	maxPrice: number | null;
-	minPrice: number | null;
+	maxprice: number | null;
+	minprice: number | null;
 	price: string;
-	priceDescription: string | null;
+	pricedescription: string | null;
 	source: string;
 	starttime: DateTime | null;
 	title: string;

@@ -16,15 +16,15 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 	const getDisplayedPrice = () => {
 		let price = "";
 
-		if(event.minPrice !== null){
-			price += `$${event.minPrice}`
+		if(event.minprice !== null){
+			price += `$${event.minprice}`
 		}
 
-		if(event.maxPrice !== null && event.maxPrice !== event.minPrice){
-			price += ` to ${event.maxPrice}`
+		if(event.maxprice !== null && event.maxprice !== event.minprice){
+			price += ` to ${event.maxprice}`
 		}
 
-		return price || event.priceDescription || event.price;
+		return price || event.pricedescription || event.price;
 	};
 
 	return (
