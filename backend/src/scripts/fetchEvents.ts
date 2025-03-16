@@ -2,7 +2,6 @@ import pool from "../../db";
 import { getBBEvents } from "../utils/baltimoreBeat";
 import { getLocalistEvents } from "../utils/localist";
 import { getBaltShowPlaceEvents } from "../utils/tumblr";
-import { sendTelegramError } from "./telegram";
 
 const fetchEvents = async () => {
 	try {

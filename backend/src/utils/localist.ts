@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import pool from "../../db";
+import { sendTelegramError } from "../scripts/telegram";
 
 export const getLocalistEvents = async (baseURL: string) => {
 	let page = 1;
@@ -43,18 +44,28 @@ export const getLocalistEvents = async (baseURL: string) => {
 
 			const imageURL = event.event.photo_url;
 
-			await pool.query(
-				"INSERT INTO events (title, location, price, source, imageURL, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-				[
-					title,
-					location,
-					price,
-					url,
-					imageURL,
-					startDateTime?.toFormat("HH:mm") || null,
-					endDateTime?.toFormat("HH:mm") || null
-				]
-			);
+			try {
+				await pool.query(
+					"INSERT INTO events (title, location, price, source, imageURL, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+					[
+						title,
+						location,
+						price,
+						url,
+						imageURL,
+						startDateTime?.toFormat("HH:mm") || null,
+						endDateTime?.toFormat("HH:mm") || null
+					]
+				);
+			} catch (error) {
+				await sendTelegramError(
+					`🚨 *${baseURL} Insertion Error* 🚨\n\nEvent:\n\`${JSON.stringify(
+						event,
+						null,
+						4
+					)}\`\n\nError:\n\`${error}\``
+				);
+			}
 		}
 
 		page++;
