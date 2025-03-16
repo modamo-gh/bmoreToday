@@ -40,13 +40,21 @@ export const getLocalistEvents = async (baseURL: string) => {
 				event.event.filters.event_cost?.[0].name ||
 				"Not Provided";
 
+			let minPrice = null;
+			let maxPrice = null;
+
+			if (baseURL.includes("prattlibrary")) {
+				minPrice = 0;
+				maxPrice = 0;
+			}
+
 			const url = event.event.localist_url;
 
 			const imageURL = event.event.photo_url;
 
 			try {
 				await pool.query(
-					"INSERT INTO events (title, location, price, source, imageURL, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+					"INSERT INTO events (title, location, price, source, imageURL, startTime, endTime, minPrice, maxPrice) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
 					[
 						title,
 						location,
@@ -54,7 +62,9 @@ export const getLocalistEvents = async (baseURL: string) => {
 						url,
 						imageURL,
 						startDateTime?.toFormat("HH:mm") || null,
-						endDateTime?.toFormat("HH:mm") || null
+						endDateTime?.toFormat("HH:mm") || null,
+						minPrice,
+						maxPrice
 					]
 				);
 			} catch (error) {
