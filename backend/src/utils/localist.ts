@@ -35,10 +35,13 @@ export const getLocalistEvents = async (baseURL: string) => {
 					"America/New_York"
 				);
 
-			const price =
+			const price = (
 				event.event.ticket_cost ||
 				event.event.filters.event_cost?.[0].name ||
-				"Not Provided";
+				"Not Provided"
+			)
+				.replace("FREE", "0")
+				.trim();
 
 			let minPrice = null;
 			let maxPrice = null;
@@ -46,6 +49,15 @@ export const getLocalistEvents = async (baseURL: string) => {
 			if (baseURL.includes("prattlibrary")) {
 				minPrice = 0;
 				maxPrice = 0;
+			} else {
+				const prices = [...price.matchAll(/\d+/g)]
+					.map((price) => Number(price[0]))
+					.sort((a, b) => a - b);
+
+				if (prices.length) {
+					minPrice = prices[0];
+					maxPrice = prices[prices.length - 1];
+				}
 			}
 
 			const url = event.event.localist_url;
