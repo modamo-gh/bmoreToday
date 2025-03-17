@@ -48,9 +48,14 @@ export const getBaltShowPlaceEvents = async () => {
 		let minPrice = null;
 		let maxPrice = null;
 
-		const prices = price.matchAll(/\d+/);
+		const prices = [...price.matchAll(/\d+/g)]
+			.map((price) => Number(price[0]))
+			.sort((a, b) => a - b);
 
-		console.log(prices)
+		if (prices.length) {
+			minPrice = prices[0];
+			maxPrice = prices[prices.length - 1];
+		}
 
 		event = event.replace(priceRegex, "").trim();
 
@@ -75,7 +80,9 @@ export const getBaltShowPlaceEvents = async () => {
 				price,
 				location,
 				endTime: null,
-				startTime
+				startTime,
+				minPrice,
+				maxPrice
 			});
 		}
 	});
@@ -83,14 +90,16 @@ export const getBaltShowPlaceEvents = async () => {
 	for (const event of events) {
 		try {
 			await pool.query(
-				"INSERT INTO events (title, location, price, source, startTime, endTime) VALUES ($1, $2, $3, $4, $5, $6)",
+				"INSERT INTO events (title, location, price, source, startTime, endTime,minPrice, maxPrice) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
 				[
 					event.title,
 					event.location,
 					event.price,
 					`https://${blogIdentifier}` || "Unknown",
 					event.startTime?.toFormat("HH:mm") || null,
-					event.endTime?.toFormat("HH:mm") || null
+					event.endTime?.toFormat("HH:mm") || null,
+					event.minPrice,
+					event.maxPrice
 				]
 			);
 		} catch (error) {
