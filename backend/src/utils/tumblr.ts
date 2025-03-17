@@ -39,9 +39,11 @@ export const getBaltShowPlaceEvents = async () => {
 
 		event = event.replace(locationRegex, "").trim();
 
-		const priceRegex = /(\$.+)/;
+		const priceRegex = /\$(.+)/;
 		const priceMatch = event.match(priceRegex);
-		const price = priceMatch ? priceMatch[1].trim() : "Unknown";
+		const price = priceMatch
+			? priceMatch[2].replace("FREE", "0").trim()
+			: "Unknown";
 
 		event = event.replace(priceRegex, "").trim();
 
