@@ -87,6 +87,21 @@ const App = () => {
 							.localeCompare(b.title.toLowerCase())
 					);
 					break;
+				case "cheapestToMostExpensive":
+					sortedEvents.sort((a, b) => {
+						const aMinPrice = a.minprice ?? Infinity;
+						const bMinPrice = b.minprice ?? Infinity;
+
+						if (aMinPrice === bMinPrice) {
+							const aMaxPrice = a.maxprice ?? Infinity;
+							const bMaxPrice = b.maxprice ?? Infinity;
+
+							return aMaxPrice - bMaxPrice;
+						}
+
+						return aMinPrice - bMinPrice;
+					});
+					break;
 				case "earliestToLatest":
 					sortedEvents.sort((a, b) => {
 						const aStartTime =

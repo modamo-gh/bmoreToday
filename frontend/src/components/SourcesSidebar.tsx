@@ -27,7 +27,8 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		{ label: "Default", settingName: "default" },
 		{ label: "A to Z", settingName: "aToZ" },
 		{ label: "Z to A", settingName: "zToA" },
-		{ label: "Earliest to Latest", settingName: "earliestToLatest" }
+		{ label: "Earliest to Latest", settingName: "earliestToLatest" },
+		{ label: "$ to $$$", settingName: "cheapestToMostExpensive" }
 	];
 
 	return (
