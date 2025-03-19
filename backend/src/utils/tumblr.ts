@@ -43,7 +43,7 @@ export const getBaltShowPlaceEvents = async () => {
 		const priceMatch = event.match(priceRegex);
 		const price = priceMatch
 			? priceMatch[1].replace("FREE", "0").trim()
-			: "Unknown";
+			: "Not Provided";
 
 		let minPrice = null;
 		let maxPrice = null;
