@@ -21,7 +21,7 @@ const EventCard: FC<EventCardType> = ({ event }) => {
 		}
 
 		if(event.maxprice !== null && event.maxprice !== event.minprice){
-			price += ` to ${event.maxprice}`
+			price += ` to $${event.maxprice}`
 		}
 
 		return price || event.pricedescription || event.price;
