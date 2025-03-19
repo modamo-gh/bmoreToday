@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+	createContext,
+	ReactNode,
+	useContext,
+	useEffect,
+	useState
+} from "react";
 import { Event } from "../types/Event";
 import { EventContextType } from "../types/EventContextType";
 
@@ -6,14 +12,54 @@ const EventContext = createContext<EventContextType | undefined>(undefined);
 
 export const EventProvider = ({ children }: { children: ReactNode }) => {
 	const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
+	const [isBaltimoreBeatChecked, setIsBaltimoreBeatChecked] = useState(true);
 	const [isBaltimoreMagazineChecked, setIsBaltimoreMagazineChecked] =
 		useState(true);
 	const [isBaltimoreShowplaceChecked, setIsBaltimoreShowplaceChecked] =
 		useState(true);
 	const [isEnochPrattLibraryChecked, setIsEnochPrattLibraryChecked] =
 		useState(true);
-	const [isBaltimoreBeatChecked, setIsBaltimoreBeatChecked] = useState(true);
 	const [sortSetting, setSortSetting] = useState("default");
+
+	useEffect(() => {
+		const savedFilters = JSON.parse(
+			localStorage.getItem("filters") || "{}"
+		);
+		const savedSort = localStorage.getItem("sort");
+
+		setIsBaltimoreBeatChecked(savedFilters.isBaltimoreBeatChecked ?? true);
+		setIsBaltimoreMagazineChecked(
+			savedFilters.isBaltimoreMagazineChecked ?? true
+		);
+		setIsBaltimoreShowplaceChecked(
+			savedFilters.isBaltimoreShowplaceChecked ?? true
+		);
+		setIsEnochPrattLibraryChecked(
+			savedFilters.isEnochPrattLibraryChecked ?? true
+		);
+
+		savedSort && setSortSetting(savedSort);
+	}, []);
+
+	useEffect(() => {
+		const filters = {
+			isBaltimoreBeatChecked,
+			isBaltimoreMagazineChecked,
+			isBaltimoreShowplaceChecked,
+			isEnochPrattLibraryChecked
+		};
+
+		localStorage.setItem("filters", JSON.stringify(filters));
+	}, [
+		isBaltimoreBeatChecked,
+		isBaltimoreMagazineChecked,
+		isBaltimoreShowplaceChecked,
+		isEnochPrattLibraryChecked
+	]);
+
+	useEffect(() => {
+		localStorage.setItem("sort", sortSetting);
+	}, [sortSetting]);
 
 	return (
 		<EventContext.Provider
@@ -29,7 +75,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 				setIsBaltimoreShowplaceChecked,
 				setIsEnochPrattLibraryChecked,
 				setSortSetting,
-				sortSetting,
+				sortSetting
 			}}
 		>
 			{children}
