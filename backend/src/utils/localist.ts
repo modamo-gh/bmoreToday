@@ -40,7 +40,7 @@ export const getLocalistEvents = async (baseURL: string) => {
 				event.event.filters.event_cost?.[0].name ||
 				"Not Provided"
 			)
-				.replace("Free", "0")
+				.replace(/[Ff][Rr][Ee]{2}/g, "0")
 				.trim();
 
 			let minPrice = null;
