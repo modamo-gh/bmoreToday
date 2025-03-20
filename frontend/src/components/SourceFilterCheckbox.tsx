@@ -9,7 +9,7 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 	width
 }) => {
 	return width > 425 ? (
-		<label className="flex flex-1 gap-2 items-center px-4 w-full">
+		<label className="flex flex-1 gap-2 items-center px-4 md:max-w-fit w-full">
 			<input
 				disabled={disabled}
 				checked={checked}
@@ -18,7 +18,7 @@ const SourceFilterCheckbox: FC<SourceFilterCheckboxType> = ({
 				onClick={(event) => event.stopPropagation()}
 				type="checkbox"
 			/>
-			<span className="flex-1 text-[#f5f5f5]">{label}</span>
+			<span className="flex-1 text-nowrap lg:text-wrap max-w-fit text-[#f5f5f5]">{label}</span>
 		</label>
 	) : (
 		<p

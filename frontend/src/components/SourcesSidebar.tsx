@@ -33,7 +33,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 
 	return (
 		<div className="bg-[#232130] min-h-1/5 flex flex-row gap-4 lg:flex-col lg:max-h-full lg:w-1/5 items-center p-4 rounded-lg w-full">
-			{width >= 768 && (
+			{width >= 1024 && (
 				<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 					<FaGears className="text-[#ff6a00]" />
 					<h2 className="text-center text-[#f5f5f5]">Settings</h2>
@@ -41,8 +41,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 			)}
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
-					expandedSection === "Filter" ? "flex-[8]" : "flex-1"
-				} items-center justify-center rounded-lg w-full h-full`}
+					expandedSection === "Filter"
+						? "flex-[8] md:max-w-4/5"
+						: "flex-1"
+				} items-center justify-center lg:min-w-full rounded-lg h-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
 						prev !== "Filter" ? "Filter" : ""
@@ -52,12 +54,20 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				{expandedSection !== "Filter" ? (
 					<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 						<FaFilter className="text-[#ff6a00]" />
-						<h2 className="hidden md:block text-center text-[#f5f5f5]">
-							Filter
-						</h2>
+						{width >= 768 && (
+							<h2
+								className={`${
+									expandedSection === ""
+										? "block"
+										: "hidden lg:block"
+								} text-center text-[#f5f5f5]`}
+							>
+								Filter
+							</h2>
+						)}
 					</div>
 				) : (
-					<div className="h-full flex flex-col">
+					<div className="flex flex-row flex-1 h-full lg:flex-col overflow-x-scroll min-w-full">
 						<SourceFilterCheckbox
 							checked={isBaltimoreBeatChecked}
 							disabled={false}
@@ -106,8 +116,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 			</div>
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
-					expandedSection === "Sort" ? "flex-[8]" : "flex-1"
-				} items-center justify-center rounded-lg w-full h-full`}
+					expandedSection === "Sort"
+						? "flex-[8] md:max-w-4/5"
+						: "flex-1"
+				} items-center justify-center lg:min-w-full rounded-lg h-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
 						prev !== "Sort" ? "Sort" : ""
@@ -117,12 +129,20 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				{expandedSection !== "Sort" ? (
 					<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 						<FaSort className="text-[#ff6a00]" />
-						<h2 className="hidden md:block text-center text-[#f5f5f5]">
-							Sort
-						</h2>
+						{width >= 768 && (
+							<h2
+								className={`${
+									expandedSection === ""
+										? "block"
+										: "hidden lg:block"
+								} text-center text-[#f5f5f5]`}
+							>
+								Sort
+							</h2>
+						)}
 					</div>
 				) : (
-					<div className="flex flex-col h-full">
+					<div className="flex h-full lg:flex-col overflow-x-scroll">
 						{radioOptions.map((option) => (
 							<SourceSortRadio
 								label={option.label}
@@ -133,11 +153,11 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				)}
 			</div>
 			<div
-				className={`bg-[#1c1a29] flex ${
+				className={`bg-[#1c1a29] cursor-pointer flex ${
 					expandedSection === "Preferences"
-						? "flex-[8]"
-						: "cursor-pointer flex-1"
-				} items-center justify-center rounded-lg w-full h-full`}
+						? "flex-[8] md:max-w-4/5"
+						: "flex-1"
+				} items-center justify-center lg:min-w-full rounded-lg h-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
 						prev !== "Preferences" ? "Preferences" : ""
@@ -147,13 +167,21 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				{expandedSection !== "Preferences" ? (
 					<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 						<FaSliders className="text-[#ff6a00]" />
-						<h2 className="hidden md:block text-center text-[#f5f5f5]">
-							Preferences
-						</h2>
+						{width >= 768 && (
+							<h2
+								className={`${
+									expandedSection === ""
+										? "block"
+										: "hidden lg:block"
+								} text-center text-[#f5f5f5]`}
+							>
+								Preferences
+							</h2>
+						)}
 					</div>
 				) : (
-					<div className="flex flex-col flex-1 h-full items-center ">
-						<div className="flex flex-1 items-center">
+					<div className="flex flex-row flex-1 h-full justify-evenly lg:flex-col ">
+						<div className="flex items-center justify-center">
 							<label
 								className="cursor-pointer flex items-center gap-2 h-fit"
 								onClick={(event) => event.stopPropagation()}
@@ -179,7 +207,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 								<span className="text-[#f5f5f5]">°F</span>
 							</label>
 						</div>
-						<div className="flex flex-1 items-center">
+						<div className="flex items-center justify-center">
 							<label
 								className="cursor-pointer flex justify-center items-center gap-2 h-fit"
 								onClick={(event) => event.stopPropagation()}
