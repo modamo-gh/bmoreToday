@@ -39,10 +39,10 @@ const Header: FC<HeaderProps> = ({ headerRef, width }) => {
 				<h2 className="text-lg">Go Outside and B(e)More</h2>
 			</div>
 			<div className="flex flex-col items-end">
-				<p>
+				<p className="text-right">
 					{width >= 768
 						? DateTime.now().toLocaleString(DateTime.DATE_HUGE)
-						: DateTime.now().toLocaleString(DateTime.DATE_MED)}
+						: DateTime.now().toLocaleString(DateTime.DATE_SHORT)}
 				</p>
 				<div className="flex flex-row gap-2 items-center justify-center">
 					<img className="h-8 w-8" src={weather.icon_URL} />
