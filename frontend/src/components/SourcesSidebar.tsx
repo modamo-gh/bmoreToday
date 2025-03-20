@@ -34,9 +34,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 	return (
 		<div className="bg-[#232130] min-h-1/5 flex flex-row gap-4 lg:flex-col lg:max-h-full lg:w-1/5 items-center p-4 rounded-lg w-full">
 			{width >= 768 && (
-				<div className="flex flex-row items-center justify-center text-lg">
+				<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 					<FaGears className="text-[#ff6a00]" />
-					<h2 className="text-center text-[#f5f5f5] p-4">Settings</h2>
+					<h2 className="text-center text-[#f5f5f5]">Settings</h2>
 				</div>
 			)}
 			<div
@@ -50,9 +50,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				}
 			>
 				{expandedSection !== "Filter" ? (
-					<div className="flex flex-row items-center justify-center text-lg">
+					<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 						<FaFilter className="text-[#ff6a00]" />
-						<h2 className="hidden md:block text-center text-[#f5f5f5] p-4">
+						<h2 className="hidden md:block text-center text-[#f5f5f5]">
 							Filter
 						</h2>
 					</div>
@@ -115,9 +115,11 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				}
 			>
 				{expandedSection !== "Sort" ? (
-					<div className="flex flex-row items-center justify-center text-lg">
+					<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 						<FaSort className="text-[#ff6a00]" />
-						<h2 className="hidden md:block text-center text-[#f5f5f5] p-4">Sort</h2>
+						<h2 className="hidden md:block text-center text-[#f5f5f5]">
+							Sort
+						</h2>
 					</div>
 				) : (
 					<div className="flex flex-col h-full">
@@ -143,60 +145,66 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				}
 			>
 				{expandedSection !== "Preferences" ? (
-					<div className="flex flex-row items-center justify-center text-lg">
+					<div className="flex flex-row gap-4 items-center justify-center text-lg w-fit">
 						<FaSliders className="text-[#ff6a00]" />
-						<h2 className="hidden md:block text-center text-[#f5f5f5] p-4">
+						<h2 className="hidden md:block text-center text-[#f5f5f5]">
 							Preferences
 						</h2>
 					</div>
 				) : (
-					<div className="flex flex-col flex-1 h-full items-center md:flex-row">
-						<label
-							className="cursor-pointer flex flex-1 items-center gap-2"
-							onClick={(event) => event.stopPropagation()}
-						>
-							<span className="text-[#f5f5f5]">°C</span>
-							<input
-								checked={useFahrenheit}
-								className="hidden"
-								onChange={() =>
-									setUseFahrenheit((prev) => !prev)
-								}
-								type="checkbox"
-							/>
-							<div className="bg-[#ff6a00] flex  h-6 items-center p-1 rounded-full w-12">
-								<div
-									className={`bg-white h-4 rounded-full transition-transform ${
-										useFahrenheit
-											? "translate-x-6"
-											: "translate-x-0"
-									} w-4`}
+					<div className="flex flex-col flex-1 h-full items-center ">
+						<div className="flex flex-1 items-center">
+							<label
+								className="cursor-pointer flex items-center gap-2 h-fit"
+								onClick={(event) => event.stopPropagation()}
+							>
+								<span className="text-[#f5f5f5]">°C</span>
+								<input
+									checked={useFahrenheit}
+									className="hidden"
+									onChange={() =>
+										setUseFahrenheit((prev) => !prev)
+									}
+									type="checkbox"
 								/>
-							</div>
-							<span className="text-[#f5f5f5]">°F</span>
-						</label>
-						<label
-							className="cursor-pointer flex justify-center items-center gap-2"
-							onClick={(event) => event.stopPropagation()}
-						>
-							<span className="text-[#f5f5f5]">12 hr</span>
-							<input
-								checked={use12Hours}
-								className="hidden"
-								onChange={() => setUse12Hours((prev) => !prev)}
-								type="checkbox"
-							/>
-							<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">
-								<div
-									className={`bg-white h-4 rounded-full transition-transform ${
-										use12Hours
-											? "translate-x-0"
-											: "translate-x-6"
-									} w-4`}
+								<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">
+									<div
+										className={`bg-white h-4 rounded-full transition-transform ${
+											useFahrenheit
+												? "translate-x-6"
+												: "translate-x-0"
+										} w-4`}
+									/>
+								</div>
+								<span className="text-[#f5f5f5]">°F</span>
+							</label>
+						</div>
+						<div className="flex flex-1 items-center">
+							<label
+								className="cursor-pointer flex justify-center items-center gap-2 h-fit"
+								onClick={(event) => event.stopPropagation()}
+							>
+								<span className="text-[#f5f5f5]">12 hr</span>
+								<input
+									checked={use12Hours}
+									className="hidden"
+									onChange={() =>
+										setUse12Hours((prev) => !prev)
+									}
+									type="checkbox"
 								/>
-							</div>
-							<span className="text-[#f5f5f5]">24 hr</span>
-						</label>
+								<div className="bg-[#ff6a00] flex h-6 items-center p-1 rounded-full w-12">
+									<div
+										className={`bg-white h-4 rounded-full transition-transform ${
+											use12Hours
+												? "translate-x-0"
+												: "translate-x-6"
+										} w-4`}
+									/>
+								</div>
+								<span className="text-[#f5f5f5]">24 hr</span>
+							</label>
+						</div>
 					</div>
 				)}
 			</div>
