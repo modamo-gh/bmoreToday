@@ -2,7 +2,13 @@ import { FC, useState } from "react";
 import { useEventContext } from "../contexts/EventContext";
 import { SourcesSidebarProps } from "../types/SourcesSidebarProps";
 import SourceFilterCheckbox from "./SourceFilterCheckbox";
-import { FaFilter, FaGears, FaSliders, FaSort } from "react-icons/fa6";
+import {
+	FaArrowLeft,
+	FaFilter,
+	FaGears,
+	FaSliders,
+	FaSort
+} from "react-icons/fa6";
 import SourceSortRadio from "./SourceSortRadio";
 import { usePreferencesContext } from "../contexts/PreferencesContext";
 
@@ -39,11 +45,20 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 					<h2 className="text-center text-[#f5f5f5]">Settings</h2>
 				</div>
 			)}
+			{width < 768 && expandedSection && (
+				<div className="flex items-center justify-center w-1/5" onClick={() => setExpandedSection("")}>
+					<FaArrowLeft className="text-[#ff6a00]" />
+				</div>
+			)}
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
 					expandedSection === "Filter"
-						? "flex-[8] md:max-w-4/5"
+						? "flex-[8] max-w-4/5"
 						: "flex-1"
+				} ${
+					expandedSection !== "Filter" && expandedSection !== ""
+						? "hidden md:flex"
+						: "flex"
 				} items-center justify-center lg:min-w-full rounded-lg h-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
@@ -58,8 +73,8 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 							<h2
 								className={`${
 									expandedSection === ""
-										? "block"
-										: "hidden lg:block"
+										? "flex"
+										: "hidden lg:flex"
 								} text-center text-[#f5f5f5]`}
 							>
 								Filter
@@ -117,8 +132,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
 					expandedSection === "Sort"
-						? "flex-[8] md:max-w-4/5"
+						? "flex-[8] max-w-4/5"
 						: "flex-1"
+				} ${
+					expandedSection !== "Sort" && expandedSection !== ""
+						? "hidden md:flex"
+						: "flex"
 				} items-center justify-center lg:min-w-full rounded-lg h-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
@@ -134,7 +153,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 								className={`${
 									expandedSection === ""
 										? "block"
-										: "hidden lg:block"
+										: "hidden lg:flex"
 								} text-center text-[#f5f5f5]`}
 							>
 								Sort
@@ -155,8 +174,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
 					expandedSection === "Preferences"
-						? "flex-[8] md:max-w-4/5"
+						? "flex-[8] max-w-4/5"
 						: "flex-1"
+				} ${
+					expandedSection !== "Preferences" && expandedSection !== ""
+						? "hidden md:flex"
+						: "flex"
 				} items-center justify-center lg:min-w-full rounded-lg h-full`}
 				onClick={() =>
 					setExpandedSection((prev) =>
@@ -172,7 +195,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 								className={`${
 									expandedSection === ""
 										? "block"
-										: "hidden lg:block"
+										: "hidden lg:flex"
 								} text-center text-[#f5f5f5]`}
 							>
 								Preferences
@@ -180,13 +203,15 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 						)}
 					</div>
 				) : (
-					<div className="flex flex-row flex-1 h-full justify-evenly lg:flex-col ">
+					<div className="flex flex-row flex-1 h-full items-center justify-evenly lg:flex-col min-w-full">
 						<div className="flex items-center justify-center">
 							<label
 								className="cursor-pointer flex items-center gap-2 h-fit"
 								onClick={(event) => event.stopPropagation()}
 							>
-								<span className="text-[#f5f5f5]">°C</span>
+								<span className="text-center text-[#f5f5f5]">
+									°C
+								</span>
 								<input
 									checked={useFahrenheit}
 									className="hidden"
@@ -204,7 +229,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 										} w-4`}
 									/>
 								</div>
-								<span className="text-[#f5f5f5]">°F</span>
+								<span className="text-center text-[#f5f5f5]">
+									°F
+								</span>
 							</label>
 						</div>
 						<div className="flex items-center justify-center">
@@ -212,7 +239,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 								className="cursor-pointer flex justify-center items-center gap-2 h-fit"
 								onClick={(event) => event.stopPropagation()}
 							>
-								<span className="text-[#f5f5f5]">12 hr</span>
+								<span className="text-center text-[#f5f5f5]">
+									12 hr
+								</span>
 								<input
 									checked={use12Hours}
 									className="hidden"
@@ -230,7 +259,9 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 										} w-4`}
 									/>
 								</div>
-								<span className="text-[#f5f5f5]">24 hr</span>
+								<span className="text-center text-[#f5f5f5]">
+									24 hr
+								</span>
 							</label>
 						</div>
 					</div>
