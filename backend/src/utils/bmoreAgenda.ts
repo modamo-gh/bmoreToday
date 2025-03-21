@@ -39,8 +39,8 @@ export const getBaltimoreAgendaEvents = async () => {
 					price,
 					url,
 					imageURL,
-					startTime,
-					endTime,
+					startTime ? startTime.toSQLTime() : null,
+					endTime ? endTime.toSQLTime() : null,
 					minPrice,
 					maxPrice
 				]
