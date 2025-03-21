@@ -6,7 +6,7 @@ import { sendTelegramError } from "../scripts/telegram";
 export const getBaltimoreAgendaEvents = async () => {
 	const baseURL = "https://bmoreagenda.org";
 	const response = await axios.get(`${baseURL}/api/events`);
-	const events = response.data;
+	const events: any[] = response.data;
 
 	const todaysEvents = events.filter((event) =>
 		DateTime.now()
