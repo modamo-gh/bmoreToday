@@ -9,9 +9,10 @@ export const getBaltimoreAgendaEvents = async () => {
 	const events: any[] = response.data;
 
 	const todaysEvents = events.filter((event) =>
-		DateTime.now()
-			.plus({ days: 1 })
-			.hasSame(DateTime.fromSeconds(event.start_datetime), "day")
+		DateTime.now().hasSame(
+			DateTime.fromSeconds(event.start_datetime),
+			"day"
+		)
 	);
 
 	todaysEvents.forEach(async (event) => {
