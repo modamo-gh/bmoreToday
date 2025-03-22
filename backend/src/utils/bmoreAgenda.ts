@@ -8,16 +8,16 @@ export const getBaltimoreAgendaEvents = async () => {
 	const response = await axios.get(`${baseURL}/api/events`);
 	const events: any[] = response.data;
 
-	const todaysEvents = events.filter((event) =>
-		DateTime.now()
-			.setZone("America/New_York")
-			.hasSame(
-				DateTime.fromSeconds(event.start_datetime).setZone(
-					"America/New_York"
-				),
-				"day"
-			)
-	);
+	const today = DateTime.now().setZone("America/New_York");
+	const tomorrow = today.plus({ days: 1 });
+
+	const todaysEvents = events.filter((event) => {
+		const eventDate = DateTime.fromSeconds(event.start_datetime).setZone(
+			"America/New_York"
+		);
+
+		return eventDate >= today && eventDate < tomorrow;
+	});
 
 	todaysEvents.forEach(async (event) => {
 		const title = event.title;
