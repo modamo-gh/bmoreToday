@@ -9,10 +9,14 @@ export const getBaltimoreAgendaEvents = async () => {
 	const events: any[] = response.data;
 
 	const todaysEvents = events.filter((event) =>
-		DateTime.now().hasSame(
-			DateTime.fromSeconds(event.start_datetime),
-			"day"
-		)
+		DateTime.now()
+			.setZone("America/New_York")
+			.hasSame(
+				DateTime.fromSeconds(event.start_datetime).setZone(
+					"America/New_York"
+				),
+				"day"
+			)
 	);
 
 	todaysEvents.forEach(async (event) => {
