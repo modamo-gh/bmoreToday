@@ -22,10 +22,14 @@ export const getBaltimoreAgendaEvents = async () => {
 		const title = event.title;
 		const location = event.place.name || event.place.address;
 		const startTime = event.start_datetime
-			? DateTime.fromSeconds(event.start_datetime)
+			? DateTime.fromSeconds(event.start_datetime).setZone(
+				"America/New_York"
+			)
 			: null;
 		const endTime = event.end_datetime
-			? DateTime.fromSeconds(event.end_datetime)
+			? DateTime.fromSeconds(event.end_datetime).setZone(
+				"America/New_York"
+			)
 			: null;
 		const price = "Not Provided";
 		const minPrice = null;

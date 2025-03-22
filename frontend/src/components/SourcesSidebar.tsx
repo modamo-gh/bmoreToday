@@ -17,10 +17,12 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
+		isBmoreAgendaChecked,
 		isEnochPrattLibraryChecked,
 		setIsBaltimoreBeatChecked,
 		setIsBaltimoreMagazineChecked,
 		setIsBaltimoreShowplaceChecked,
+		setIsBmoreAgendaChecked,
 		setIsEnochPrattLibraryChecked
 	} = useEventContext();
 
@@ -107,6 +109,15 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 							label={"Baltimore Showplace"}
 							onChange={() => {
 								setIsBaltimoreShowplaceChecked((prev) => !prev);
+							}}
+							width={width}
+						/>
+						<SourceFilterCheckbox
+							checked={isBmoreAgendaChecked}
+							disabled={false}
+							label={"Bmore Agenda"}
+							onChange={() => {
+								setIsBmoreAgendaChecked((prev) => !prev);
 							}}
 							width={width}
 						/>

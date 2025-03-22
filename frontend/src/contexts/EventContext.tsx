@@ -17,6 +17,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 		useState(true);
 	const [isBaltimoreShowplaceChecked, setIsBaltimoreShowplaceChecked] =
 		useState(true);
+	const [isBmoreAgendaChecked, setIsBmoreAgendaChecked] = useState(true);
 	const [isEnochPrattLibraryChecked, setIsEnochPrattLibraryChecked] =
 		useState(true);
 	const [sortSetting, setSortSetting] = useState("default");
@@ -34,6 +35,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 		setIsBaltimoreShowplaceChecked(
 			savedFilters.isBaltimoreShowplaceChecked ?? true
 		);
+		setIsBmoreAgendaChecked(savedFilters.isBmoreAgenda ?? true);
 		setIsEnochPrattLibraryChecked(
 			savedFilters.isEnochPrattLibraryChecked ?? true
 		);
@@ -46,6 +48,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 			isBaltimoreBeatChecked,
 			isBaltimoreMagazineChecked,
 			isBaltimoreShowplaceChecked,
+			isBmoreAgendaChecked,
 			isEnochPrattLibraryChecked
 		};
 
@@ -54,6 +57,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
+		isBmoreAgendaChecked,
 		isEnochPrattLibraryChecked
 	]);
 
@@ -68,11 +72,13 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 				isBaltimoreBeatChecked,
 				isBaltimoreMagazineChecked,
 				isBaltimoreShowplaceChecked,
+				isBmoreAgendaChecked,
 				isEnochPrattLibraryChecked,
 				setIsBaltimoreBeatChecked,
 				setFilteredEvents,
 				setIsBaltimoreMagazineChecked,
 				setIsBaltimoreShowplaceChecked,
+				setIsBmoreAgendaChecked,
 				setIsEnochPrattLibraryChecked,
 				setSortSetting,
 				sortSetting

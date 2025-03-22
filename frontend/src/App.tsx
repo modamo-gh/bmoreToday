@@ -12,6 +12,7 @@ const App = () => {
 		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
+		isBmoreAgendaChecked,
 		isEnochPrattLibraryChecked,
 		setFilteredEvents,
 		sortSetting
@@ -144,6 +145,8 @@ const App = () => {
 						)) ||
 					(isBaltimoreShowplaceChecked &&
 						event.source.includes("baltshowplace.tumblr.com")) ||
+					(isBmoreAgendaChecked &&
+						event.source.includes("bmoreagenda.org/")) ||
 					(isEnochPrattLibraryChecked &&
 						event.source.includes(
 							"https://calendar.prattlibrary.org/"
@@ -158,6 +161,7 @@ const App = () => {
 		isBaltimoreBeatChecked,
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
+		isBmoreAgendaChecked,
 		isEnochPrattLibraryChecked,
 		setFilteredEvents,
 		sortSetting
@@ -171,6 +175,7 @@ const App = () => {
 					(isBaltimoreBeatChecked ||
 						isBaltimoreMagazineChecked ||
 						isBaltimoreShowplaceChecked ||
+						isBmoreAgendaChecked ||
 						isEnochPrattLibraryChecked) &&
 					events?.length &&
 					width >= 768

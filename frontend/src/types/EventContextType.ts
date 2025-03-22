@@ -6,11 +6,13 @@ export type EventContextType = {
 	isBaltimoreBeatChecked: boolean;
 	isBaltimoreMagazineChecked: boolean;
 	isBaltimoreShowplaceChecked: boolean;
+	isBmoreAgendaChecked: boolean;
 	isEnochPrattLibraryChecked: boolean;
 	setFilteredEvents: Dispatch<SetStateAction<Event[]>>;
 	setIsBaltimoreBeatChecked: Dispatch<SetStateAction<boolean>>;
 	setIsBaltimoreMagazineChecked: Dispatch<SetStateAction<boolean>>;
 	setIsBaltimoreShowplaceChecked: Dispatch<SetStateAction<boolean>>;
+	setIsBmoreAgendaChecked: Dispatch<SetStateAction<boolean>>;
 	setIsEnochPrattLibraryChecked: Dispatch<SetStateAction<boolean>>;
 	setSortSetting: Dispatch<SetStateAction<string>>;
 	sortSetting: string;
