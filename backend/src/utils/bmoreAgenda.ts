@@ -7,9 +7,8 @@ export const getBaltimoreAgendaEvents = async () => {
 	const baseURL = "https://bmoreagenda.org";
 	const response = await axios.get(`${baseURL}/api/events`);
 	const events: any[] = response.data;
-
-	const today = DateTime.now().setZone("America/New_York");
-	const tomorrow = today.plus({ days: 1 });
+	const today = DateTime.now().setZone("America/New_York").startOf("day");
+	const tomorrow = today.plus({ days: 1 }).setZone("America/New_York");
 
 	const todaysEvents = events.filter((event) => {
 		const eventDate = DateTime.fromSeconds(event.start_datetime).setZone(
@@ -19,7 +18,7 @@ export const getBaltimoreAgendaEvents = async () => {
 		return eventDate >= today && eventDate < tomorrow;
 	});
 
-	todaysEvents.forEach(async (event) => {
+	for(const event of todaysEvents){
 		const title = event.title;
 		const location = event.place.name || event.place.address;
 		const startTime = event.start_datetime
@@ -58,5 +57,5 @@ export const getBaltimoreAgendaEvents = async () => {
 				)}\`\n\nError:\n\`${error}\``
 			);
 		}
-	});
+	};
 };
