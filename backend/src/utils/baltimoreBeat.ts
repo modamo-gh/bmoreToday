@@ -47,14 +47,16 @@ const getBaltimoreBeatEvents = async (url: string) => {
 	const response = await axios.get(url);
 	const html = response.data;
 	const $ = load(html);
-	const today = DateTime.now()
-		.setZone("America/New_York")
-		.toFormat("EEEE, MMMM d");
-	const todaysSection = $("p strong")
-		.filter((_, element) => $(element).text().trim() === today)
+	const today = DateTime.now().setZone("America/New_York");
+	const todaysDate = today.toFormat("EEEE, MMMM d");
+	const tomorrowsDate = today.plus({ days: 1 }).toFormat("EEEE, MMMM d");
+	const todaysSection = $("p > strong")
+		.filter((_, element) => $(element).text().trim() === todaysDate)
 		.parent();
-	const todaysEvents = todaysSection.nextUntil("p.has-primary-color", "p");
-
+	const tomorrowsSection = $("p > strong")
+		.filter((_, element) => $(element).text().trim() === tomorrowsDate)
+		.parent();
+	const todaysEvents = todaysSection.nextUntil(tomorrowsSection, "p");
 	const events: Event[] = [];
 
 	todaysEvents.each((_, element) => {
@@ -136,9 +138,7 @@ export const getBBEvents = async () => {
 						event.location,
 						event.price,
 						url || "Unknown",
-						event.startTime
-							? event.startTime.toSQLTime()
-							: null,
+						event.startTime ? event.startTime.toSQLTime() : null,
 						event.endTime ? event.endTime.toSQLTime() : null
 					]
 				);
