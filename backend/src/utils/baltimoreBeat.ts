@@ -103,8 +103,10 @@ const getBaltimoreBeatEvents = async (url: string) => {
 				.split("to")
 				.map((token) => token.trim().replace(/\./g, "").toUpperCase());
 
-			if (timeTokens[1] && timeTokens[1] === "NOON") {
-				timeTokens[1] = "12:00 PM";
+			for (let i = 0; i < timeTokens.length; i++) {
+				if (timeTokens[i].toUpperCase() === "NOON") {
+					timeTokens[i] = "12:00 PM";
+				}
 			}
 
 			event.startTime = DateTime.fromFormat(timeTokens[0], "h:mm a")
