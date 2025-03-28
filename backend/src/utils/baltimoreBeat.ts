@@ -95,7 +95,7 @@ const getBaltimoreBeatEvents = async (url: string) => {
 			.text()
 			.trim()
 			.match(
-				/\d{1,2}(:\d{1,2})?\s[a|p]\.m\.(\sto\s((\d{1,2}(:\d{1,2})?\s[a|p]\.m\.)|noon))?/
+				/(\d{1,2}(:\d{1,2})?\s[a|p]\.m\.|[Nn]oon)(\sto\s((\d{1,2}(:\d{1,2})?\s[a|p]\.m\.)|noon))?/
 			)?.[0];
 
 		if (time) {
