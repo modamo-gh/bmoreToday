@@ -92,12 +92,8 @@ export const getBmoreArtEvents = async () => {
 
 			const getDateTime = (time: string) =>
 				DateTime.fromFormat(time, "h:mma").isValid
-					? DateTime.fromFormat(time, "h:mma").setZone(
-							"America/New_York"
-					  )
-					: DateTime.fromFormat(time, "ha").setZone(
-							"America/New_York"
-					  );
+					? DateTime.fromFormat(time, "h:mma")
+					: DateTime.fromFormat(time, "ha");
 
 			let st: DateTime | string = tokens[0];
 
