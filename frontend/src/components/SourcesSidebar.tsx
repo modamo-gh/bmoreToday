@@ -18,11 +18,13 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isBmoreAgendaChecked,
+		isBmoreArtChecked,
 		isEnochPrattLibraryChecked,
 		setIsBaltimoreBeatChecked,
 		setIsBaltimoreMagazineChecked,
 		setIsBaltimoreShowplaceChecked,
 		setIsBmoreAgendaChecked,
+		setIsBmoreArtChecked,
 		setIsEnochPrattLibraryChecked
 	} = useEventContext();
 
@@ -48,7 +50,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 				</div>
 			)}
 			{width < 768 && expandedSection && (
-				<div className="flex items-center justify-center w-1/5" onClick={() => setExpandedSection("")}>
+				<div
+					className="flex items-center justify-center w-1/5"
+					onClick={() => setExpandedSection("")}
+				>
 					<FaArrowLeft className="text-[#ff6a00]" />
 				</div>
 			)}
@@ -122,10 +127,10 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 							width={width}
 						/>
 						<SourceFilterCheckbox
-							checked={false}
-							disabled
+							checked={isBmoreArtChecked}
+							disabled={false}
 							label={"Bmore Art"}
-							onChange={() => {}}
+							onChange={() => {setIsBmoreArtChecked(prev => !prev)}}
 							width={width}
 						/>
 						<SourceFilterCheckbox
@@ -142,9 +147,7 @@ const SourcesSidebar: FC<SourcesSidebarProps> = ({ width }) => {
 			</div>
 			<div
 				className={`bg-[#1c1a29] cursor-pointer flex ${
-					expandedSection === "Sort"
-						? "flex-[8] max-w-4/5"
-						: "flex-1"
+					expandedSection === "Sort" ? "flex-[8] max-w-4/5" : "flex-1"
 				} ${
 					expandedSection !== "Sort" && expandedSection !== ""
 						? "hidden md:flex"

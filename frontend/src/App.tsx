@@ -13,6 +13,7 @@ const App = () => {
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isBmoreAgendaChecked,
+		isBmoreArtChecked,
 		isEnochPrattLibraryChecked,
 		setFilteredEvents,
 		sortSetting
@@ -62,8 +63,6 @@ const App = () => {
 					if (!event.imageurl) {
 						event.imageurl = mascots[mascotIndex];
 						mascotIndex = (mascotIndex + 1) % mascots.length;
-
-						console.log(event);
 					}
 				}
 
@@ -147,6 +146,8 @@ const App = () => {
 						event.source.includes("baltshowplace.tumblr.com")) ||
 					(isBmoreAgendaChecked &&
 						event.source.includes("bmoreagenda.org/")) ||
+					(isBmoreArtChecked &&
+						event.source.includes("bmoreart.com")) ||
 					(isEnochPrattLibraryChecked &&
 						event.source.includes(
 							"https://calendar.prattlibrary.org/"
@@ -162,6 +163,7 @@ const App = () => {
 		isBaltimoreMagazineChecked,
 		isBaltimoreShowplaceChecked,
 		isBmoreAgendaChecked,
+		isBmoreArtChecked,
 		isEnochPrattLibraryChecked,
 		setFilteredEvents,
 		sortSetting
@@ -176,6 +178,7 @@ const App = () => {
 						isBaltimoreMagazineChecked ||
 						isBaltimoreShowplaceChecked ||
 						isBmoreAgendaChecked ||
+						isBmoreArtChecked ||
 						isEnochPrattLibraryChecked) &&
 					events?.length &&
 					width >= 768
