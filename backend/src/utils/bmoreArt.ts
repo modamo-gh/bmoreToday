@@ -150,7 +150,7 @@ export const getBmoreArtEvents = async () => {
 
 		try {
 			await pool.query(
-				"INSERT INTO events (title, location, source, startTime, endTime, minPrice, maxPrice, imageURL) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+				"INSERT INTO events (title, location, source, startTime, endTime, minPrice, maxPrice, imageURL, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
 				[
 					event.title,
 					event.location,
@@ -159,7 +159,8 @@ export const getBmoreArtEvents = async () => {
 					event.endTime ? event.endTime.toSQLTime() : null,
 					event.minPrice,
 					event.maxPrice,
-					event.imageURL
+					event.imageURL,
+					null
 				]
 			);
 		} catch (error) {
