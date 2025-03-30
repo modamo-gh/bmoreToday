@@ -150,7 +150,7 @@ export const getBmoreArtEvents = async () => {
 
 		try {
 			await pool.query(
-				"INSERT INTO events (title, location, source, startTime, endTime, minPrice, maxPrice, imageURL) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+				"INSERT INTO events (title, location, source, startTime, endTime, minPrice, maxPrice, imageURL) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
 				[
 					event.title,
 					event.location,
