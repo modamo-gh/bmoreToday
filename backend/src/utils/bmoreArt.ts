@@ -160,7 +160,7 @@ export const getBmoreArtEvents = async () => {
 					isFinite(event.minPrice) ? event.minPrice : null,
 					isFinite(event.maxPrice) ? event.maxPrice : null,
 					event.imageURL,
-					null
+					"Not Provided"
 				]
 			);
 		} catch (error) {
