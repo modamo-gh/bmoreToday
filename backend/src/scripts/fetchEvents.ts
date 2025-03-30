@@ -1,6 +1,7 @@
 import pool from "../../db";
 import { getBBEvents } from "../utils/baltimoreBeat";
 import { getBaltimoreAgendaEvents } from "../utils/bmoreAgenda";
+import { getBmoreArtEvents } from "../utils/bmoreArt";
 import { getLocalistEvents } from "../utils/localist";
 import { getBaltShowPlaceEvents } from "../utils/tumblr";
 
@@ -12,6 +13,7 @@ const fetchEvents = async () => {
 		await getLocalistEvents("https://calendar.prattlibrary.org/");
 		await getBBEvents();
 		await getBaltimoreAgendaEvents();
+		await getBmoreArtEvents();
 	} catch (error) {
 		console.error("Error during cron job:", error);
 	} finally {

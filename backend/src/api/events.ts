@@ -3,6 +3,7 @@ import pool from "../../db";
 import { getLocalistEvents } from "../utils/localist";
 import { getBaltShowPlaceEvents } from "../utils/tumblr";
 import { getBaltimoreAgendaEvents } from "../utils/bmoreAgenda";
+import { getBmoreArtEvents } from "../utils/bmoreArt";
 
 const eventRouter = Router();
 
@@ -18,10 +19,12 @@ eventRouter.get("/", async (req: Request, res: Response) => {
 
 eventRouter.post("/", async (req: Request, res: Response) => {
 	try {
+		await getBaltimoreAgendaEvents();
 		await getBaltShowPlaceEvents();
+		await getBmoreArtEvents();
 		await getLocalistEvents("https://events.baltimoremagazine.com");
 		await getLocalistEvents("https://calendar.prattlibrary.org/");
-		await getBaltimoreAgendaEvents()
+
 		res.status(201).json({ message: "Events saved successfully!" });
 	} catch (error) {
 		console.log("Error saving events:", error);
