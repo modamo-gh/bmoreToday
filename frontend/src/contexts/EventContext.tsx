@@ -36,7 +36,7 @@ export const EventProvider = ({ children }: { children: ReactNode }) => {
 		setIsBaltimoreShowplaceChecked(
 			savedFilters.isBaltimoreShowplaceChecked ?? true
 		);
-		setIsBmoreAgendaChecked(savedFilters.isBmoreAgenda ?? true);
+		setIsBmoreAgendaChecked(savedFilters.isBmoreAgendaChecked ?? true);
 		setIsBmoreArtChecked(savedFilters.isBmoreArtChecked ?? true);
 		setIsEnochPrattLibraryChecked(
 			savedFilters.isEnochPrattLibraryChecked ?? true
