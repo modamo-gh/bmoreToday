@@ -49,14 +49,14 @@ const getBaltimoreBeatEvents = async (url: string) => {
 	const $ = load(html);
 	const today = DateTime.now().setZone("America/New_York");
 	const todaysDate = today.toFormat("EEEE, MMMM d");
-	const tomorrowsDate = today.plus({ days: 1 }).toFormat("EEEE, MMMM d");
-	const todaysSection = $("p > strong")
-		.filter((_, element) => $(element).text().trim() === todaysDate)
-		.parent();
-	const tomorrowsSection = $("p > strong")
-		.filter((_, element) => $(element).text().trim() === tomorrowsDate)
-		.parent();
-	const todaysEvents = todaysSection.nextUntil(tomorrowsSection, "p");
+	const todaysSection = $(
+		"p.has-link-color.has-primary-color.has-text-color"
+	).filter((_, element) => $(element).text().trim() === todaysDate);
+	const todaysEvents = todaysSection.nextUntil(
+		"p.has-primary-color.has-text-color.has-link-color",
+		"p"
+	);
+
 	const events: Event[] = [];
 
 	todaysEvents.each((_, element) => {
