@@ -100,7 +100,7 @@ export const getBmoreArtEvents = async () => {
 			if (tokens.length > 1) {
 				let et: DateTime | string = tokens[1];
 
-				if (!st.endsWith("am") || !st.endsWith("pm")) {
+				if (!st.endsWith("am") && !st.endsWith("pm")) {
 					st += et.slice(-2);
 				}
 
